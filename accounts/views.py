@@ -11,6 +11,8 @@ def signup(request):
         fullname = request.POST.get('fullname')
         nickname = request.POST.get('nickname')
 
+        print(email, password, fullname, nickname)
+        
         user = User()
         user.email = email
         user.password = password
