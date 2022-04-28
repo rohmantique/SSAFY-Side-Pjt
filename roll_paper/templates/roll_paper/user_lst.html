@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<form action="{% url 'rollpaper:write' %}" method='GET'>
+  {% for user in user_lst %}
+    {{ user }}
+
+  {% endfor %}
+</form>
+
+{% endblock content %}
+
