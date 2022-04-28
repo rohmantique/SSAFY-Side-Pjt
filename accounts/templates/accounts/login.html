@@ -3,7 +3,7 @@
 {% block content %}
 <h1>Login Page</h1>
 <!--여기 url 아직 index 함수 없어서 오류 날것임!!-->
-<form action="{% url 'roll_paper:index' %}" method="POST">
+{% comment %} <form action="{% url 'roll_paper:index' %}" method="POST">
   {% csrf_token %}
     <div>
       <label for="email">email: </label>
@@ -15,7 +15,7 @@
     </div>
     
   <button>로그인하기</button>
-</form>
+</form> {% endcomment %}
 
 {% endblock content %}
 
