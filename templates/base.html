@@ -10,9 +10,29 @@
 <body>
 
 <div class="container mt-3">
-  {% block content %}
+  {% if request.user.is_authenticated %}
+    {{ user }}님 안녕하세요!
+    <li>
+      <form action="{% url 'accounts:logout' %}" method="POST">
+        {% csrf_token %}
+        <button>로그아웃</button>
+      </form>
+    </li>
+    <li>
+      <a href="{% url 'accounts:update' %}">내 정보 수정</a>
+    </li>
+  {% else %}
+    <li>
+      <a href="{% url 'accounts:signup' %}">회원가입</a>
+    </li>
+    <li>
+      <a href="{% url 'accounts:login' %}">로그인</a>
+    </li>
+  {% endif %}
   
+  {% block content %}
   {% endblock content %}
+
 </div>
 
 
