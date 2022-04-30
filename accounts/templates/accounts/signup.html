@@ -1,12 +1,23 @@
 {% extends 'base.html' %}
 
+{% block style %}
+.container {
+  background-image: url('../../static/images/main_chat.jpg');
+  background-size: cover;
+  position: relative;
+}
+{% endblock style %}
+
+
 {% block content %}
-<h1>Signup Page</h1>
-<h2>주의!!! (비밀번호 쉽게 만들라는 주의사항 모달창 넣기)</h2>
-<form action="" method='POST'>
-  {% csrf_token %}
-  {{form.as_p}}
-  <button>회원가입</button>
-</form>
+<div>
+  <h1>Signup Page</h1>
+  <h2>주의!!! (비밀번호 쉽게 만들라는 주의사항 모달창 넣기)</h2>
+  <form action="" method='POST'>
+    {% csrf_token %}
+    {{form.as_p}}
+    <button>회원가입</button>
+  </form>
+</div>
 {% endblock content %}
 
