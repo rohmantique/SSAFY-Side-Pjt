@@ -10,6 +10,8 @@ from django.contrib.auth import (
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.http import require_POST
 
+from .forms import CustomAuthenticationForm
+
 # Create your views here.
 def signup(request):
 
@@ -34,7 +36,7 @@ def signup(request):
 def login(request):
 
     if request.method == 'POST':
-        form = AuthenticationForm(request, request.POST)
+        form = CustomAuthenticationForm(request, request.POST)
         if form.is_valid():
 
             user = form.get_user()
@@ -45,7 +47,7 @@ def login(request):
             return redirect(next_url or 'rollpaper:index')
 
     else:
-        form = AuthenticationForm()
+        form = CustomAuthenticationForm()
 
     context = {
         'form':form,
