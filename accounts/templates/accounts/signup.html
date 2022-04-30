@@ -1,23 +1,49 @@
 {% extends 'base.html' %}
 
 {% block style %}
-.container {
-  background-image: url('../../static/images/main_chat.jpg');
+{% comment %} .container {
+  background-image: url('../../static/images/index_mobile.jpg');
   background-size: cover;
   position: relative;
-}
+} {% endcomment %}
 {% endblock style %}
 
 
 {% block content %}
-<div>
-  <h1>Signup Page</h1>
-  <h2>주의!!! (비밀번호 쉽게 만들라는 주의사항 모달창 넣기)</h2>
+<h1>처음이신가요? 아래 정보를 입력해주세요.</h1>
+<!-- Button trigger modal -->
+<div class="d-flex justify-content-center">
+  <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal">
+    <i class="bi bi-exclamation-octagon-fill text-danger" width="20" height="20"></i> 잠깐!
+  </button>
+</div>
+
+<div class="d-flex justify-content-center mt-4">
   <form action="" method='POST'>
     {% csrf_token %}
-    {{form.as_p}}
-    <button>회원가입</button>
+    {{ form.as_p }}
+    <button class="btn mybtn" style="float: right;">완료</button>
   </form>
 </div>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">🖐 주의 사항</h5>
+      </div>
+      <div class="modal-body">
+        <p>1. 계정이 곧 편지함이 되므로 한 사람당 한 계정을 유지해주세요 (찡긋-)</p>
+        <p>2. 편지는 이름 정보가 없이 *닉네임*으로만 전송되니 본인을 특정할 수 없는 기발한 닉네임을 사용해보세요</p>
+        <p>3. 아이디 및 비밀번호 찾기는 구현하지 않았습니다... 까먹지 않을 수 있죠?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn mybtn" data-bs-dismiss="modal">알겠어요</button>
+      </div>
+    </div>
+  </div>
+</div>  
+
 {% endblock content %}
 
