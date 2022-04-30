@@ -26,7 +26,7 @@ class CustomUserCreationForm(UserCreationForm):
         label='닉네임',
         widget=forms.TextInput(
             attrs={
-                'class': 'form-control',
+                'class': 'form-control placeholder',
                 'placeholder': '편지에 보여질 이름입니다',
                 'color': 'white',
             }
