@@ -18,38 +18,57 @@
 </head>
 <body>
 
-<div class="container mt-3">
-  <nav>
+  <div class="container mt-3">
+    <nav>
+      {% if request.user.is_authenticated %}
+        <li>
+          <form action="{% url 'accounts:logout' %}" method="POST">
+            {% csrf_token %}
+            <button>로그아웃</button>
+          </form>
+        </li>
+        <li>
+          <a href="{% url 'accounts:update' %}">내 계정</a>
+        </li>
+      {% else %}
+        <li>
+          <a href="{% url 'accounts:signup' %}">회원가입</a>
+        </li>
+        <li>
+          <a href="{% url 'accounts:login' %}">로그인</a>
+        </li>
+      {% endif %}
+    </nav>
+
     {% if request.user.is_authenticated %}
-      <li>
-        <form action="{% url 'accounts:logout' %}" method="POST">
-          {% csrf_token %}
-          <button>로그아웃</button>
-        </form>
-      </li>
-      <li>
-        <a href="{% url 'accounts:update' %}">내 계정</a>
-      </li>
-    {% else %}
-      <li>
-        <a href="{% url 'accounts:signup' %}">회원가입</a>
-      </li>
-      <li>
-        <a href="{% url 'accounts:login' %}">로그인</a>
-      </li>
+      <p>{{ user }}님, 안녕하세요!</p>
     {% endif %}
-  </nav>
+    
+    {% block content %}
+    {% endblock content %}
 
-  {% if request.user.is_authenticated %}
-    <p>{{ user }}님, 안녕하세요!</p>
-  {% endif %}
-  
-  {% block content %}
-  {% endblock content %}
-
-</div>
+  </div>
 
 
+  <!-- Signup Modal -->
+  <div class="modal fade" id="signupModal" tabindex="-1" aria-labelledby="signupModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="signupModalLabel">🖐 주의 사항</h5>
+        </div>
+        <div class="modal-body">
+          <p>1. 계정이 곧 편지함이 되므로 한 사람당 한 계정을 유지해주세요 (빵긋)</p>
+          <p>2. 서울 1반은 모두 한국인이니 이름은 한.글.로.만!</p>
+          <p>2. 편지는 *닉네임*으로만 전송되니 본인을 특정할 수 없는 기발한 닉네임을 사용해보세요.</p>
+          <p>3. 아이디 및 비밀번호 찾기는 구현하지 않았습니다... 까먹지 않을 수 있죠?</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn mybtn" data-bs-dismiss="modal">알겠어요</button>
+        </div>
+      </div>
+    </div>
+  </div>  
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 </body>

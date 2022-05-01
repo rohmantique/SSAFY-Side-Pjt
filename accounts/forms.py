@@ -19,6 +19,9 @@ class CustomUserCreationForm(UserCreationForm):
         widget=forms.TextInput(
             attrs={
                 'class': 'form-control',
+                'id': 'realname',
+                'data-bs-toggle': 'tooltip',
+                'data-bs-placement': 'top',
             }
         )
     )
