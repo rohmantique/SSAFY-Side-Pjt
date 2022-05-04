@@ -14,6 +14,11 @@ from .forms import RollPaperForm
 def index(request):
     return render(request, 'roll_paper/index.html')
 
+
+def main(request):
+    return render(request, 'roll_paper/main.html')
+
+
 @require_http_methods(['GET', 'POST'])
 @login_required
 def userlst(request):

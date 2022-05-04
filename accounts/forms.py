@@ -30,7 +30,6 @@ class CustomUserCreationForm(UserCreationForm):
         widget=forms.TextInput(
             attrs={
                 'class': 'form-control',
-                'color': 'white',
             }
         )
     )
@@ -56,6 +55,14 @@ class CustomUserCreationForm(UserCreationForm):
 
 
 class CustomUserChangeForm(UserChangeForm):
+    nickname = forms.CharField(
+        label='닉네임',
+        widget=forms.TextInput(
+            attrs={
+                'class': 'form-control',
+            }
+        )
+    )    
     password = None
 
     class Meta:

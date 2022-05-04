@@ -44,7 +44,7 @@ def login(request):
 
             next_url = request.GET.get('next')
 
-            return redirect(next_url or 'rollpaper:index')
+            return redirect(next_url or 'rollpaper:main')
 
     else:
         form = CustomAuthenticationForm()
