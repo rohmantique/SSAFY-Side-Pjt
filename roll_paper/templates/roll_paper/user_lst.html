@@ -2,11 +2,14 @@
 
 {% block content %}
 
-<form action="{% url 'rollpaper:write' user.pk %}" method='GET'>
+<h1>편지를 보내고 싶은 사람을 눌러주세요!</h1>
   {% for user in user_lst %}
-    <button>{{ user.realname }}</button>
-
+  {% if user.realname != request.user.realname and user not in excepted%}
+  <form action="{% url 'rollpaper:letterbox' user.pk %}" method='GET'>
+    <button>{{ user.realname }}</button><br>
+  </form>
+  {% endif %}
   {% endfor %}
-</form>
+
 
 {% endblock content %}
