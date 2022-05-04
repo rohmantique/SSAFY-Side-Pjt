@@ -21,6 +21,7 @@
   <div class="container">
     <nav>
       {% if request.user.is_authenticated %}
+      <p>{{ user }}님, 안녕하세요!</p>
         <li>
           <form action="{% url 'accounts:logout' %}" method="POST">
             {% csrf_token %}
@@ -29,6 +30,18 @@
         </li>
         <li>
           <a href="{% url 'accounts:update' %}">내 계정</a>
+        </li>
+        <li>
+          <form action="{% url 'rollpaper:letterbox' user.pk %}" method='GET'>
+            <button>편지함</button>
+          </form>
+          <form action="{% url 'rollpaper:userlst' %}" method='GET'>
+            <button>편지쓰기</button>
+          </form>
+          <form action="{% url 'rollpaper:sentletter' user.pk %}" method='GET'>
+            <button>내가 쓴 편지</button>
+          </form>
+          <hr>
         </li>
       {% else %}
         <li>
@@ -40,9 +53,6 @@
       {% endif %}
     </nav>
 
-    {% if request.user.is_authenticated %}
-      <p>{{ user }}님, 안녕하세요!</p>
-    {% endif %}
     
     {% block content %}
     {% endblock content %}
