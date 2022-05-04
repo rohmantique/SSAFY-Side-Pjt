@@ -1,5 +1,27 @@
 {% extends 'base.html' %}
 
+
+{% block style %}
+  .container {
+    background-image: url('../../static/images/index_pc.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+
+  .title1 {
+    position: left;
+  }
+
+  .title2 {
+    position: center;
+  }
+{% endblock style %}
+
 {% block content %}
+  <header class="mt-5">
+    <h1 class="title1">서울 1반</h1>
+    <h1 class="title2">추억 쌓피</h1>
+  </header>
 
 {% endblock content %}

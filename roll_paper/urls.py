@@ -5,6 +5,7 @@ app_name = 'rollpaper'
 
 urlpatterns = [ 
     path('index/', views.index, name='index'),
+    path('main/', views.main, name='main'),
     path('userlst/', views.userlst, name='userlst'),
 
     #편지쓰기

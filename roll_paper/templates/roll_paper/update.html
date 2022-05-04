@@ -2,19 +2,17 @@
 
 {% block content %}
 
-<h1>
-  편지 수정
-</h1>
+  <h2>편지 수정</h2>
 
-<form action="" method = 'POST'>
-  {% csrf_token %}
-  {{form.as_p}}
-  <button>수정 완료</button>
-</form>
+  <form action="" method = 'POST'>
+    {% csrf_token %}
+    {{form.as_p}}
+    <button>수정 완료</button>
+  </form>
 
-<form action="{% url 'rollpaper:delete' user.pk realname%}" method = 'POST'>
-  {% csrf_token %}
-  <button>편지 삭제</button>
-</form>
+  <form action="{% url 'rollpaper:delete' user.pk realname%}" method = 'POST'>
+    {% csrf_token %}
+    <button>편지 삭제</button>
+  </form>
 
 {% endblock content %}
