@@ -2,12 +2,23 @@
 
 
 {% block style %}
+@media(max-width: 425px) {
+  .container {
+      background-image: url('../../static/images/index.jpg');
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center;
+    }
+}  
+
+@media(min-width: 426px) {
   .container {
     background-image: url('../../static/images/index_pc.jpg');
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
   }
+}
 
   .title1 {
     position: left;

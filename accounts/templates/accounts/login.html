@@ -1,16 +1,16 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>편지쓰러 오셨군요? 기다렸어요</h1>
+  <header class="text-center">
+    <h2>편지쓰러 오셨군요? 기다렸어요</h2>
+  </header>
 
-<div class="d-flex justify-content-center mt-4">
-  <form action="" method='POST'>
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button class="btn mybtn" style="float: right;">로그인</button>
-  </form>
-</div>
-
-
+  <div class="d-flex justify-content-center mt-4">
+    <form action="" method='POST'>
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button class="btn mybtn" style="float: right;">로그인</button>
+    </form>
+  </div>
 {% endblock content %}
 
