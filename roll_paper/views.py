@@ -87,6 +87,7 @@ def detail(request, user_pk, rollpaper_pk):
     rollpaper = get_object_or_404(RollPaper, pk=rollpaper_pk)
     context = {
         'rollpaper': rollpaper,
+        'from' : rollpaper.user2.nickname
     }
     return render(request, 'roll_paper/detail.html', context)
 
