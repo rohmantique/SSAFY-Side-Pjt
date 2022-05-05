@@ -1,6 +1,7 @@
 from django.contrib.auth.forms import UserChangeForm,UserCreationForm, AuthenticationForm, UsernameField
 # from django.contrib.auth.models import User
 from django.contrib.auth import get_user_model
+from django.contrib.auth.hashers import check_password
 from django import forms
 
 User = get_user_model()
@@ -87,3 +88,23 @@ class CustomAuthenticationForm(AuthenticationForm):
                 'autocomplete': 'current-password',
                 'class': 'form-control'}),
     )
+
+class CheckPasswordForm(forms.Form):
+    password = forms.CharField(
+        label='비밀번호',
+        widget=forms.PasswordInput(
+            attrs={'class': 'form-control', }
+        ),
+    )
+    def __init__(self, user, *args, **kwargs): #현재 접속중인 사용자의 password 가져오기 위해 init 메서드로 user객체 생성
+        super().__init__(*args, **kwargs)
+        self.user = user
+
+    def clean(self): #clean 메서드로 form에 입력된 password값과 init으로 생성된 현재 사용자의 password 값을 check_password 통해 비교
+        cleaned_data = super().clean()
+        password = cleaned_data.get('password')
+        confirm_password = self.user.password
+
+        if password:
+            if not check_password(password, confirm_password):
+                self.add_error('password', '비밀번호가 일치하지 않습니다.')
