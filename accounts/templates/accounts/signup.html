@@ -23,6 +23,9 @@
 {% endblock content %}
 
 {% block script %}
+  const navbar = document.querySelector('nav#navbar')
+  navbar.setAttribute('class', 'd-none')
+
   {% comment %} 이름 input에 한글만 입력받게 js 설정 {% endcomment %}
   const name = document.querySelector('input#realname')
   const onlyKorean = function() {
