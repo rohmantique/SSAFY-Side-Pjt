@@ -18,7 +18,7 @@
 
 <h1>편지를 보내고 싶은 사람을 눌러주세요!</h1>
   {% for user in user_lst %}
-  {% if user.realname != request.user.realname and user not in excepted%}
+  {% if user.realname != request.user.realname and user not in excepted %}
   <form action="{% url 'rollpaper:letterbox' user.pk %}" method='GET'>
     <button>{{ user.realname }}</button><br>
   </form>

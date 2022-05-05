@@ -1,10 +1,9 @@
 {% extends 'base.html' %}
 
-
 {% block style %}
 @media(max-width: 767px) {
   .bg-img {
-      background-image: url('../../static/images/index2.PNG');
+      background-image: url('../../static/images/index.PNG');
       background-size: contain;
       background-repeat: no-repeat;
       background-position: center;
@@ -22,7 +21,7 @@
 {% endblock style %}
 
 {% block content %}
-  <header class="mt-5">
+  <header class="m-5">
     <h1 class="pe-5">서울 1반</h1>
     <h1 class="ps-5">추억 쌓피</h1>
   </header>
@@ -41,12 +40,12 @@
     </div>
 
     <div class="m-5 p-5"></div>
-    <div class="m-5"></div>
+    <div class="m-4"></div>
   </main>
 
 {% endblock content %}
 
 {% block script %}
   const navbar = document.querySelector('nav#navbar')
-  navbar.addClass('d-none')
+  navbar.setAttribute('class', 'd-none')
 {% endblock script %}
