@@ -20,7 +20,7 @@
 
   <nav id="navbar" class="myClass">
     {% if request.user.is_authenticated %}
-    <p>{{ user }}님, 안녕하세요!</p>
+    <p>{{ user.realname }}님, 안녕하세요!</p>
       <li>
         <form action="{% url 'accounts:logout' %}" method="POST">
           {% csrf_token %}
