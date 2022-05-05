@@ -11,7 +11,6 @@ urlpatterns = [
 
     #편지쓰기
     path('rollpaper/write/<str:realname>/', views.write, name='write'),
-    path('rollpaper/complete/', views.complete, name='complete'),
 
     #편지읽기
     path('rollpaper/<int:user_pk>/letterbox/', views.letterbox, name='letterbox'),

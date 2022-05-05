@@ -53,8 +53,8 @@ def write(request, realname): #user는 편지 받을 대상임
             rollpaper.user2 = request.user
             rollpaper.save()
 
-            messages.add_message(request, messages.INFO, '편지가 성공적으로 작성되었습니다.')
-            return redirect('rollpaper:complete')
+            messages.add_message(request, messages.INFO, f'{realname[1:]}에게 마음이 보내졌습니다!')
+            return redirect('rollpaper:userlst')
 
     else:
         form = RollPaperForm()
@@ -65,15 +65,10 @@ def write(request, realname): #user는 편지 받을 대상임
     return render(request, 'roll_paper/write.html', context)
 
 
-@require_http_methods(['GET'])
-@login_required
-def complete(request):
-    return render(request, 'roll_paper/complete.html')
-
-
 def letterbox(request, user_pk):
     receiver = get_object_or_404(get_user_model(), pk=user_pk)
     realname = receiver.realname
+
     if request.user == receiver:
         user_info = request.user
         my_rollpaper = RollPaper.objects.filter(user=request.user)
