@@ -6,5 +6,5 @@ class RollPaperForm(forms.ModelForm):
 
     class Meta:
         model = RollPaper
-        fields = ('title', 'content', 'author', )
+        fields = ('title', 'content',)
 

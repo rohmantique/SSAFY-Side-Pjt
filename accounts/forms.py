@@ -1,4 +1,4 @@
-from django.contrib.auth.forms import UserChangeForm,UserCreationForm
+from django.contrib.auth.forms import UserChangeForm,UserCreationForm, AuthenticationForm, UsernameField
 # from django.contrib.auth.models import User
 from django.contrib.auth import get_user_model
 from django import forms
@@ -19,6 +19,9 @@ class CustomUserCreationForm(UserCreationForm):
         widget=forms.TextInput(
             attrs={
                 'class': 'form-control',
+                'id': 'realname',
+                'data-bs-toggle': 'tooltip',
+                'data-bs-placement': 'top',
             }
         )
     )
@@ -26,9 +29,7 @@ class CustomUserCreationForm(UserCreationForm):
         label='닉네임',
         widget=forms.TextInput(
             attrs={
-                'class': 'form-control placeholder',
-                'placeholder': '편지에 보여질 이름입니다',
-                'color': 'white',
+                'class': 'form-control',
             }
         )
     )
@@ -54,8 +55,35 @@ class CustomUserCreationForm(UserCreationForm):
 
 
 class CustomUserChangeForm(UserChangeForm):
+    nickname = forms.CharField(
+        label='닉네임',
+        widget=forms.TextInput(
+            attrs={
+                'class': 'form-control',
+            }
+        )
+    )    
     password = None
 
     class Meta:
         model = User
         fields = ('nickname',)
+
+
+class CustomAuthenticationForm(AuthenticationForm):
+    username = UsernameField(
+        label='아이디',
+        widget=forms.TextInput(
+            attrs={
+                'autofocus': True,
+                'class': 'form-control',
+                }),
+    )
+    password = forms.CharField(
+        label="비밀번호",
+        strip=False,
+        widget=forms.PasswordInput(
+            attrs={
+                'autocomplete': 'current-password',
+                'class': 'form-control'}),
+    )

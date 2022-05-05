@@ -1,5 +1,51 @@
 {% extends 'base.html' %}
 
+{% block style %}
+@media(max-width: 767px) {
+  .bg-img {
+      background-image: url('../../static/images/index.PNG');
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center;
+    }
+}  
+
+@media(min-width: 768px) {
+  .bg-img {
+    background-image: url('../../static/images/index_pc.PNG');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+}
+{% endblock style %}
+
 {% block content %}
+  <header class="m-5">
+    <h1 class="pe-5">서울 1반</h1>
+    <h1 class="ps-5">추억 쌓피</h1>
+  </header>
+
+  <main class="d-flex p-5 flex-column bg-img">
+    <div class="mb-2 text-center">
+      <a href="{% url 'rollpaper:aboutus' %}" class="btn fs-3 text-decoration-none text-dark">* 소개 *</a>
+    </div>
+
+    <div class="mb-2 text-center">
+      <a href="{% url 'accounts:signup' %}" class="btn fs-3 text-decoration-none text-dark">* 회원가입 *</a>
+    </div>
+    
+    <div class="mt-2 mb-5 text-center">
+      <a href="{% url 'accounts:login' %}" class="btn fs-3 text-decoration-none text-dark">* 로그인 *</a>
+    </div>
+
+    <div class="m-5 p-5"></div>
+    <div class="m-4"></div>
+  </main>
 
 {% endblock content %}
+
+{% block script %}
+  const navbar = document.querySelector('nav#navbar')
+  navbar.setAttribute('class', 'd-none')
+{% endblock script %}

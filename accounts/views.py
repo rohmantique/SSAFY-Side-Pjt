@@ -1,6 +1,13 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth.forms import AuthenticationForm, PasswordChangeForm
-from .forms import CustomUserCreationForm, CustomUserChangeForm
+from django.contrib.auth.forms import (
+    AuthenticationForm, 
+    PasswordChangeForm
+)
+from .forms import (
+    CustomUserCreationForm, 
+    CustomUserChangeForm
+)
+
 from django.contrib.auth import (
     login as auth_login,
     logout as auth_logout,
@@ -9,6 +16,8 @@ from django.contrib.auth import (
 )
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.http import require_POST
+
+from .forms import CustomAuthenticationForm
 
 # Create your views here.
 def signup(request):
@@ -34,7 +43,7 @@ def signup(request):
 def login(request):
 
     if request.method == 'POST':
-        form = AuthenticationForm(request, request.POST)
+        form = CustomAuthenticationForm(request, request.POST)
         if form.is_valid():
 
             user = form.get_user()
@@ -42,10 +51,10 @@ def login(request):
 
             next_url = request.GET.get('next')
 
-            return redirect(next_url or 'rollpaper:index')
+            return redirect(next_url or 'rollpaper:main')
 
     else:
-        form = AuthenticationForm()
+        form = CustomAuthenticationForm()
 
     context = {
         'form':form,
@@ -60,55 +69,34 @@ def logout(request):
     auth_logout(request)
     return redirect('rollpaper:index')
 
-
 @login_required
 def update(request):
 
     if request.method == 'POST':
         form1 = CustomUserChangeForm(request.POST, instance=request.user)
-        form2 = PasswordChangeForm(request.user, request.POST)
         if form1.is_valid():
-            if (not request.POST.get('password') 
-                and not request.POST.get('new_password1') 
-                and not request.POST.get('new_password2')):
-                form1.save()
-            else:
-                form1.save()
-                form2.save()
-
-                update_session_auth_hash(request, form2.user)
-
+            form1.save()
             return redirect('rollpaper:index')
+    else:
+        form1 = CustomUserChangeForm(instance=request.user)
 
-    form1 = CustomUserChangeForm(instance = request.user) # 현재 로그인 된 유저 객체
-    form2 = PasswordChangeForm(user=request.user)
     context = {
-        'form1' : form1,
-        'form2' : form2
+        'form1': form1,
     }
     return render(request, 'accounts/update.html', context)
 
+@login_required
+def change_password(request):
+    if request.method == 'POST':
+        form2 = PasswordChangeForm(request.user, request.POST)
+        if form2.is_valid():
+            form2.save()
+            update_session_auth_hash(request, form2.user)
+            return redirect('accounts:update')
+    else:
+        form2 = PasswordChangeForm(user=request.user)
 
-# adminpass
-
-
-# @login_required
-# def change_password(request):
-
-#     if request.method == 'POST':
-#         # 1) 현재 로그인된 사용자 정보 바인딩 (request.user)
-#         # 2) 사용자가 보낸 수정된 비밀번호 정보 (request.POST)
-#         form = PasswordChangeForm(request.user, request.POST)
-#         if form.is_valid():
-#             form.save()
-
-#             update_session_auth_hash(request, form.user) # form에서 가져온 user (request.user 그대로 쓰면 안됨)
-#             return redirect('posts:index')
-#     else:
-#         form = PasswordChangeForm(user=request.user)
-
-#     context = {
-#         'form' : form,
-#     }
-
-#     return render(request, 'accounts/change_password.html', context)
+    context = {
+        'form2': form2,
+    }
+    return render(request, 'accounts/change_password.html', context)

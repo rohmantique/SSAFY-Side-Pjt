@@ -1,23 +1,33 @@
 {% extends 'base.html' %}
 
-{% block style %}
-.container {
-  background-image: url('../../static/images/main_chat.jpg');
-  background-size: cover;
-  position: relative;
-}
-{% endblock style %}
-
-
 {% block content %}
-<div>
-  <h1>Signup Page</h1>
-  <h2>주의!!! (비밀번호 쉽게 만들라는 주의사항 모달창 넣기)</h2>
-  <form action="" method='POST'>
-    {% csrf_token %}
-    {{form.as_p}}
-    <button>회원가입</button>
-  </form>
-</div>
+  <header class="m-5">
+    <h2>처음이신가요? 아래 정보를 입력해주세요</h2>
+  </header>
+
+  <!-- Button trigger modal -->
+  <div class="d-flex justify-content-center mt-4">
+    <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#signupModal">
+      <i class="bi bi-exclamation-octagon-fill text-danger" width="20" height="20"></i> <span class="align-text-bottom">잠깐!</span>
+    </button>
+  </div>
+
+  <div class="d-flex justify-content-center mt-3">
+    <form action="" method='POST'>
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button class="btn mybtn" style="float: right;">완료</button>
+    </form>
+  </div>
+
 {% endblock content %}
 
+{% block script %}
+  {% comment %} 이름 input에 한글만 입력받게 js 설정 {% endcomment %}
+  const name = document.querySelector('input#realname')
+  const onlyKorean = function() {
+    const pattern = /[a-z0-9]|[ \[\]{}()<>?|`~!@#$%^&*-_+=,.;:\"'\\]/g
+    this.value = this.value.replace(pattern, '')
+  }
+  name.addEventListener('keypress', onlyKorean)
+{% endblock script %}

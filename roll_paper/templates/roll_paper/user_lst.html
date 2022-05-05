@@ -1,13 +1,30 @@
 {% extends 'base.html' %}
 
 {% block content %}
-
-<form action="{% url 'rollpaper:write' %}" method='GET'>
-  {% for user in user_lst %}
-    {{ user }}
-
+<ul class="messages list-unstyled">
+  {% for message in messages %}
+  <li 
+    {% if message.tags == 'info' %} 
+      class="alert alert-info"
+    {% elif message.tags == 'error' %}
+      class="alert alert-danger"
+    {% endif %}
+  >
+    <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Info:"><use xlink:href="#info-fill"/></svg>
+    {{ message }}
+  </li>
   {% endfor %}
-</form>
+</ul>
+
+<h1>편지를 보내고 싶은 사람을 눌러주세요!</h1>
+  {% for user in user_lst %}
+  {% if user.realname != request.user.realname and user not in excepted %}
+  <form action="{% url 'rollpaper:letterbox' user.pk %}" method='GET'>
+    <button>{{ user.realname }}</button><br>
+  </form>
+  {% endif %}
+  
+  {% endfor %}
+
 
 {% endblock content %}
-

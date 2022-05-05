@@ -7,6 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
   <link href="https://fonts.googleapis.com/css2?family=Gaegu:wght@300;400&display=swap" rel="stylesheet">  
   <link rel="stylesheet" href="{% static 'css/style.css' %}">
   <title>DDOONGDDANG's</title>
@@ -17,34 +18,71 @@
 </head>
 <body>
 
-<div class="container mt-3">
-  {% if request.user.is_authenticated %}
-    {{ user }}님 안녕하세요!
-    <li>
-      <form action="{% url 'accounts:logout' %}" method="POST">
-        {% csrf_token %}
-        <button>로그아웃</button>
-      </form>
-    </li>
-    <li>
-      <a href="{% url 'accounts:update' %}">내 정보 수정</a>
-    </li>
-  {% else %}
-    <li>
-      <a href="{% url 'accounts:signup' %}">회원가입</a>
-    </li>
-    <li>
-      <a href="{% url 'accounts:login' %}">로그인</a>
-    </li>
-  {% endif %}
-  
-  {% block content %}
-  {% endblock content %}
+  <nav id="navbar" class="myClass">
+    {% if request.user.is_authenticated %}
+    <p>{{ user.realname }}님, 안녕하세요!</p>
+      <li>
+        <form action="{% url 'accounts:logout' %}" method="POST">
+          {% csrf_token %}
+          <button>로그아웃</button>
+        </form>
+      </li>
+      <li>
+        <a href="{% url 'accounts:update' %}">내 계정</a>
+      </li>
+      <li>
+        <form action="{% url 'rollpaper:letterbox' user.pk %}" method='GET'>
+          <button>편지함</button>
+        </form>
+        <form action="{% url 'rollpaper:userlst' %}" method='GET'>
+          <button>편지쓰기</button>
+        </form>
+        <form action="{% url 'rollpaper:sentletter' user.pk %}" method='GET'>
+          <button>내가 쓴 편지</button>
+        </form>
+        <hr>
+      </li>
+    {% else %}
+      <li>
+        <a href="{% url 'accounts:signup' %}">회원가입</a>
+      </li>
+      <li>
+        <a href="{% url 'accounts:login' %}">로그인</a>
+      </li>
+    {% endif %}
+  </nav>
 
-</div>
+  <div class="container">
+    {% block content %}
+    {% endblock content %}
+  </div>
 
 
+  <!-- Signup Modal -->
+  <div class="modal fade" id="signupModal" tabindex="-1" aria-labelledby="signupModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="signupModalLabel">🖐 주의 사항</h5>
+        </div>
+        <div class="modal-body">
+          <p>1. 계정이 곧 편지함이 되므로 한 사람당 한 계정을 유지해주세요 (빵긋)</p>
+          <p>2. 서울 1반은 모두 한국인이니 이름은 한.글.로.만!</p>
+          <p>2. 편지는 *닉네임*으로만 전송되니 본인을 특정할 수 없는 기발한 닉네임을 사용해보세요.</p>
+          <p>3. 아이디 및 비밀번호 찾기는 구현하지 않았습니다... 까먹지 않을 수 있죠?</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn mybtn" data-bs-dismiss="modal">알겠어요</button>
+        </div>
+      </div>
+    </div>
+  </div>  
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+  
+  <script>
+    {% block script %}
+    {% endblock script %}
+  </script>
 </body>
 </html>
