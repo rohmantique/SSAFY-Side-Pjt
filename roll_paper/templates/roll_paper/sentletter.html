@@ -5,7 +5,7 @@
 <h2>내가 보낸 편지들</h2>
 
 {% for rollpaper in sentrollpaper %}
-<a href="{% url 'rollpaper:update' user.pk rollpaper.user.realname %}">{{ rollpaper.title }}</a>
+<a href="{% url 'rollpaper:update' user.pk rollpaper.user.realname %}">{{ rollpaper.user.realname }}</a>
 {% endfor %}
 
 {% endblock content %}
