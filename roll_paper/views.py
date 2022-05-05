@@ -19,6 +19,10 @@ def main(request):
     return render(request, 'roll_paper/main.html')
 
 
+def aboutus(request):
+    return render(request, 'roll_paper/aboutus.html')
+
+
 @require_http_methods(['GET', 'POST'])
 @login_required
 def userlst(request):

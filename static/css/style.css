@@ -5,12 +5,10 @@
 
 body {
   font-family: 'Garam';
-  padding: 0;
-  margin: 0;
 }
 
 html {
-  font-size:22px;
+  font-size:18px;
 }
 
 h1 {
@@ -35,7 +33,7 @@ a {
 }
 
 @media screen and (max-width : 425px){ 
-  html {font-size: 11px}
+  html {font-size: 10px}
 }
 
 input {
