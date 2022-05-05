@@ -7,7 +7,7 @@ from .forms import (
     CustomUserCreationForm, 
     CustomUserChangeForm
 )
-
+from django.contrib import messages
 from django.contrib.auth import (
     login as auth_login,
     logout as auth_logout,
@@ -17,7 +17,7 @@ from django.contrib.auth import (
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.http import require_POST
 
-from .forms import CustomAuthenticationForm
+from .forms import CustomAuthenticationForm, CheckPasswordForm
 
 # Create your views here.
 def signup(request):
@@ -38,7 +38,6 @@ def signup(request):
     }
 
     return render(request, 'accounts/signup.html', context)
-
 
 def login(request):
 
@@ -61,7 +60,6 @@ def login(request):
     }
         
     return render(request, 'accounts/login.html', context)
-
 
 @login_required
 @require_POST
@@ -100,3 +98,26 @@ def change_password(request):
         'form2': form2,
     }
     return render(request, 'accounts/change_password.html', context)
+
+@login_required
+def user_delete(request):
+
+    if request.method == 'POST':
+        password_form = CheckPasswordForm(request.user, request.POST)
+
+        if password_form.is_valid():
+            request.user.delete()
+            logout(request)
+            messages.success(request, '회원탈퇴가 완료되었습니다!')
+            return redirect('accounts:signup')
+    else:
+        password_form = CheckPasswordForm(request.user)
+
+    context = {
+        'password_form': password_form,
+    }
+
+    return render(request, 'accounts/user_delete.html', context)
+
+
+
