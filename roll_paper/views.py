@@ -11,7 +11,10 @@ from accounts.models import User
 from .forms import RollPaperForm
 
 # Create your views here.
+
 def index(request):
+    if request.user.is_authenticated:
+        return redirect('rollpaper:main')
     return render(request, 'roll_paper/index.html')
 
 
