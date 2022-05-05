@@ -53,7 +53,7 @@ def write(request, realname): #user는 편지 받을 대상임
             rollpaper.user2 = request.user
             rollpaper.save()
 
-            messages.add_message(request, messages.INFO, f'{realname[1:]}에게 마음이 보내졌습니다!')
+            messages.add_message(request, messages.INFO, f'{realname[1:]}에게 마음을 성공적으로 전달했단다!')
             return redirect('rollpaper:userlst')
 
     else:

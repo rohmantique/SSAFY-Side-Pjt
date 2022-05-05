@@ -1,139 +1,102 @@
-from django.http import HttpResponse
-from django.shortcuts import (render, redirect, get_object_or_404)
-from django.contrib import messages
+from django.shortcuts import render, redirect
+from django.contrib.auth.forms import (
+    AuthenticationForm, 
+    PasswordChangeForm
+)
+from .forms import (
+    CustomUserCreationForm, 
+    CustomUserChangeForm
+)
+
+from django.contrib.auth import (
+    login as auth_login,
+    logout as auth_logout,
+    get_user_model,
+    update_session_auth_hash,
+)
 from django.contrib.auth.decorators import login_required
-from django.views.decorators.http import require_http_methods
-from django.contrib.auth import get_user_model
+from django.views.decorators.http import require_POST
 
-from roll_paper.models import RollPaper
-from accounts.models import User
-
-from .forms import RollPaperForm
+from .forms import CustomAuthenticationForm
 
 # Create your views here.
-def index(request):
-    return render(request, 'roll_paper/index.html')
+def signup(request):
 
-
-def main(request):
-    return render(request, 'roll_paper/main.html')
-
-
-@require_http_methods(['GET', 'POST'])
-@login_required
-def userlst(request):
-    user_lst = User.objects.all()
-    excepted = []
-
-    for user in user_lst[:]:
-        a = RollPaper.objects.filter(user2=request.user, user=user)
-        if a :
-            excepted.append(user)
-
-    context = {
-        'user_lst': user_lst,
-        'excepted' : excepted
-    }
-    return render(request, 'roll_paper/user_lst.html', context)
-
-@require_http_methods(['GET', 'POST'])
-@login_required
-def write(request, realname): #user는 편지 받을 대상임
-   
+    if request.user.is_authenticated:
+        return redirect('rollpaper:index')
+        
     if request.method == 'POST':
-        receiver = get_object_or_404(get_user_model(), realname=realname)
-        form = RollPaperForm(request.POST)
+        form = CustomUserCreationForm(request.POST)
         if form.is_valid():
-            rollpaper = form.save(commit=False)
-            rollpaper.user = receiver
-            rollpaper.user2 = request.user
-            rollpaper.save()
-
-            messages.add_message(request, messages.INFO, f'{realname[1:]}에게 마음을 성공적으로 전달했단다!')
-            return redirect('rollpaper:userlst')
-
+            user = form.save()
+            return redirect('rollpaper:index')
     else:
-        form = RollPaperForm()
+        form = CustomUserCreationForm()
 
     context = {
-        'form': form,
+        'form' : form
     }
-    return render(request, 'roll_paper/write.html', context)
+
+    return render(request, 'accounts/signup.html', context)
 
 
-def letterbox(request, user_pk):
-    receiver = get_object_or_404(get_user_model(), pk=user_pk)
-    realname = receiver.realname
+def login(request):
 
-    if request.user == receiver:
-        user_info = request.user
-        my_rollpaper = RollPaper.objects.filter(user=request.user)
-        context = {
-            'my_rollpaper': my_rollpaper,
-            'user_info': user_info
-        }
-        return render(request, 'roll_paper/letterbox.html', context)
+    if request.method == 'POST':
+        form = CustomAuthenticationForm(request, request.POST)
+        if form.is_valid():
+
+            user = form.get_user()
+            auth_login(request, user)
+
+            next_url = request.GET.get('next')
+
+            return redirect(next_url or 'rollpaper:main')
+
     else:
-        return redirect('rollpaper:write', realname)
+        form = CustomAuthenticationForm()
 
-
-
-def detail(request, user_pk, rollpaper_pk):
-    receiver = get_object_or_404(get_user_model(), pk=user_pk)
-    rollpaper = get_object_or_404(RollPaper, pk=rollpaper_pk)
     context = {
-        'rollpaper': rollpaper,
+        'form':form,
     }
-    return render(request, 'roll_paper/detail.html', context)
+        
+    return render(request, 'accounts/login.html', context)
 
 
 @login_required
-@require_http_methods(['GET', 'POST'])
-def update(request, user_pk, realname):
-    writer = get_object_or_404(get_user_model(), pk=user_pk)
-    if request.user == writer:
-        receiver = get_object_or_404(get_user_model(), realname=realname)
-        rollpaper = get_object_or_404(RollPaper, user = receiver, user2 = request.user)
-
-        if request.method == 'POST':
-            form = RollPaperForm(request.POST, instance=rollpaper)
-            if form.is_valid():
-                rollpaper = form.save()
-                return redirect('rollpaper:sentletter', user_pk)
-        else:
-            form = RollPaperForm(instance=rollpaper)
-
-        context = {
-            'form': form,
-            'realname' : realname
-        }
-
-        return render(request, 'roll_paper/update.html', context)
-    return render(request, 'roll_paper/error.html')
-
-
-def sentletter(request, user_pk):
-    writer = get_object_or_404(get_user_model(), pk=user_pk)
-    if request.user == writer:
-        user_info = request.user
-        sentrollpaper = RollPaper.objects.filter(user2=request.user)
-        context = {
-            'sentrollpaper': sentrollpaper,
-            'user_info': user_info
-        }
-        return render(request, 'roll_paper/sentletter.html', context)
-    return render(request, 'roll_paper/error.html')
-
+@require_POST
+def logout(request):
+    auth_logout(request)
+    return redirect('rollpaper:index')
 
 @login_required
-@require_http_methods(['POST'])
-def delete(request, user_pk, realname):
-    
-    if not request.user.is_authenticated:
-        return HttpResponse('권한이 없습니다', status=401)
+def update(request):
 
-    receiver = get_object_or_404(get_user_model(), realname=realname)
-    sentrollpaper = RollPaper.objects.filter(user = receiver, user2=request.user)
-    sentrollpaper.delete()
-    messages.add_message(request, messages.ERROR, '편지가 성공적으로 삭제되었습니다!')
-    return redirect('rollpaper:sentletter', user_pk)
+    if request.method == 'POST':
+        form1 = CustomUserChangeForm(request.POST, instance=request.user)
+        if form1.is_valid():
+            form1.save()
+            return redirect('rollpaper:index')
+    else:
+        form1 = CustomUserChangeForm(instance=request.user)
+
+    context = {
+        'form1': form1,
+    }
+    return render(request, 'accounts/update.html', context)
+
+@login_required
+def change_password(request):
+    if request.method == 'POST':
+        form2 = PasswordChangeForm(request.user, request.POST)
+        if form2.is_valid():
+            form2.save()
+            update_session_auth_hash(request, form2.user)
+            return redirect('accounts:update')
+    else:
+        form2 = PasswordChangeForm(user=request.user)
+
+    context = {
+        'form2': form2,
+    }
+    return render(request, 'accounts/change_password.html', context)
