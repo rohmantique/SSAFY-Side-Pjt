@@ -3,11 +3,10 @@
 {% block content %}
 <ul class="messages list-unstyled">
   {% for message in messages %}
-  <li 
+  <li
     {% if message.tags == 'info' %} 
       class="alert alert-info"
-    {% elif message.tags == 'error' %}
-      class="alert alert-danger"
+
     {% endif %}
   >
     <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Info:"><use xlink:href="#info-fill"/></svg>
@@ -16,15 +15,23 @@
   {% endfor %}
 </ul>
 
+
 <h1>편지를 보내고 싶은 사람을 눌러주세요!</h1>
+
   {% for user in user_lst %}
   {% if user.realname != request.user.realname and user not in excepted %}
-  <form action="{% url 'rollpaper:letterbox' user.pk %}" method='GET'>
+  <form action="{% url 'rollpaper:write' user.realname %}" method='GET'>
     <button>{{ user.realname }}</button><br>
   </form>
   {% endif %}
-  
   {% endfor %}
+
+  {% if empty %}
+  <h3>
+    현재 가입한 모든 사용자에게 편지를 썼네요!
+    아직 편지를 보내지 못한 사람이 있다면, 상대방이 가입할 때 까지 조금만 기다려 보아요~
+  </h3>
+  {% endif %}
 
 
 {% endblock content %}

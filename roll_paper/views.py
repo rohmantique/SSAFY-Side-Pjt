@@ -2,7 +2,7 @@ from django.http import HttpResponse
 from django.shortcuts import (render, redirect, get_object_or_404)
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from django.views.decorators.http import require_http_methods
+from django.views.decorators.http import require_http_methods, require_safe, require_GET
 from django.contrib.auth import get_user_model
 
 from roll_paper.models import RollPaper
@@ -11,23 +11,23 @@ from accounts.models import User
 from .forms import RollPaperForm
 
 # Create your views here.
-
+@require_safe
 def index(request):
     if request.user.is_authenticated:
         return redirect('rollpaper:main')
     return render(request, 'roll_paper/index.html')
 
-
+@require_GET
 def main(request):
     return render(request, 'roll_paper/main.html')
 
-
+@require_GET
 def aboutus(request):
     return render(request, 'roll_paper/aboutus.html')
 
 
-@require_http_methods(['GET', 'POST'])
 @login_required
+@require_GET
 def userlst(request):
     user_lst = User.objects.all()
     excepted = []
@@ -36,19 +36,25 @@ def userlst(request):
         a = RollPaper.objects.filter(user2=request.user, user=user)
         if a :
             excepted.append(user)
+    
+    empty = 0
+    if len(user_lst)-1 == len(excepted):
+        empty = 1
 
     context = {
         'user_lst': user_lst,
-        'excepted' : excepted
+        'excepted' : excepted,
+        'empty' : empty
     }
     return render(request, 'roll_paper/user_lst.html', context)
 
-@require_http_methods(['GET', 'POST'])
+
 @login_required
-def write(request, realname): #user는 편지 받을 대상임
+@require_http_methods(['GET', 'POST'])
+def write(request, realname):
+    receiver = get_object_or_404(get_user_model(), realname=realname)
    
     if request.method == 'POST':
-        receiver = get_object_or_404(get_user_model(), realname=realname)
         form = RollPaperForm(request.POST)
         if form.is_valid():
             rollpaper = form.save(commit=False)
@@ -60,6 +66,9 @@ def write(request, realname): #user는 편지 받을 대상임
             return redirect('rollpaper:userlst')
 
     else:
+        if request.user == receiver:
+            return redirect('rollpaper:userlst')
+
         form = RollPaperForm()
 
     context = {
@@ -68,31 +77,37 @@ def write(request, realname): #user는 편지 받을 대상임
     return render(request, 'roll_paper/write.html', context)
 
 
+@login_required
+@require_GET
 def letterbox(request, user_pk):
     receiver = get_object_or_404(get_user_model(), pk=user_pk)
-    realname = receiver.realname
 
-    if request.user == receiver:
+    if receiver == request.user:
         user_info = request.user
         my_rollpaper = RollPaper.objects.filter(user=request.user)
+        number = len(my_rollpaper)
         context = {
             'my_rollpaper': my_rollpaper,
-            'user_info': user_info
+            'user_info': user_info,
+            'number':number
         }
         return render(request, 'roll_paper/letterbox.html', context)
-    else:
-        return redirect('rollpaper:write', realname)
+    return render(request, 'roll_paper/error.html')
 
 
-
+@login_required
+@require_GET
 def detail(request, user_pk, rollpaper_pk):
     receiver = get_object_or_404(get_user_model(), pk=user_pk)
     rollpaper = get_object_or_404(RollPaper, pk=rollpaper_pk)
-    context = {
-        'rollpaper': rollpaper,
-        'from' : rollpaper.user2.nickname
-    }
-    return render(request, 'roll_paper/detail.html', context)
+
+    if rollpaper.user == receiver:
+        context = {
+            'rollpaper': rollpaper,
+            'from' : rollpaper.user2.nickname
+        }
+        return render(request, 'roll_paper/detail.html', context)
+    return render(request, 'roll_paper/error.html')
 
 
 @login_required
@@ -120,6 +135,8 @@ def update(request, user_pk, realname):
     return render(request, 'roll_paper/error.html')
 
 
+@login_required
+@require_GET
 def sentletter(request, user_pk):
     writer = get_object_or_404(get_user_model(), pk=user_pk)
     if request.user == writer:

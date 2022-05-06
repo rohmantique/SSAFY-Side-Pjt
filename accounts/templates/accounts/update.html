@@ -8,6 +8,8 @@
   <form action="" method = 'POST'>
     {% csrf_token %}
     {{form1.as_p}}
+    본인 확인을 위해 비밀번호를 입력해주세요.
+    {{ password_form.as_p }}
     
     <button>수정 완료</button>
   </form>
