@@ -20,17 +20,17 @@
       <h2>당신은 혹시 서울 1반 인싸?! 🤩</h2>
     </header>
     <h3>현재 가입한 모든 서울 1반 사람들에게 편지를 보냈어요.</h3>
-    <h3>아직 가입하지 않은 사람들에게 저희 사이트 홍보 해주실꺼죠? (내심기대)</h3>
+    <h3>아직 가입하지 않은 사람들이 있을 수 있어요. 내일도 들어와서 확인해주실꺼죠?</h3>
   {% else %}
     <header class="m-5">
-      <h2>누구에게 편지를 써볼까요?</h2>
+      <h2>편지 보내기</h2>
     </header>
   {% endif %}
 
   {% for user in user_lst %}
     {% if user.realname != request.user.realname and user not in excepted %}
       <form action="{% url 'rollpaper:write' user.realname %}" method='GET'>
-        <button>{{ user.realname }}</button><br>
+        <button class="btn m-2 userName">* {{ user.realname }}</button>
       </form>
     {% endif %}
   {% endfor %}  
