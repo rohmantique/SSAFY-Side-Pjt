@@ -121,7 +121,7 @@ def user_delete(request):
         if password_form.is_valid():
             request.user.delete()
             logout(request)
-            return redirect('accounts:signup')
+            return redirect('rollpaper:index')
     else:
         password_form = CheckPasswordForm(request.user)
 
