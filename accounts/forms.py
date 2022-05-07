@@ -1,4 +1,10 @@
-from django.contrib.auth.forms import UserChangeForm,UserCreationForm, AuthenticationForm, UsernameField
+from django.contrib.auth.forms import (
+    UserChangeForm,
+    UserCreationForm, 
+    AuthenticationForm, 
+    UsernameField,
+    PasswordChangeForm,
+)
 # from django.contrib.auth.models import User
 from django.contrib.auth import get_user_model
 from django.contrib.auth.hashers import check_password
@@ -89,11 +95,49 @@ class CustomAuthenticationForm(AuthenticationForm):
                 'class': 'form-control'}),
     )
 
+class ChangePasswordForm(PasswordChangeForm):
+    password1=forms.CharField(
+        label='기존 비밀번호',
+        strip=False,
+        widget=forms.PasswordInput(
+            attrs={
+                'autocomplete': 'current-password',
+                'class': 'form-control',
+            }
+        )
+    
+    )
+    newpassword1 = forms.CharField(
+        label='새 비밀번호',
+        widget=forms.PasswordInput(
+            attrs={
+                'class': 'form-control',
+            }
+        )
+    )
+    newpassword2 = forms.CharField(
+        label='새 비밀번호 (확인)',
+        widget=forms.PasswordInput(
+            attrs={
+                'class': 'form-control',
+            }
+        )
+    )
+    password = None
+
+    class Meta:
+        model = User
+        fields = ('password1', 'newpassword1', 'newpassword2',)
+
+    
+
 class CheckPasswordForm(forms.Form):
     password = forms.CharField(
         label='비밀번호',
         widget=forms.PasswordInput(
-            attrs={'class': 'form-control', }
+            attrs={
+                'class': 'form-control', 
+                }
         ),
     )
     def __init__(self, user, *args, **kwargs): #현재 접속중인 사용자의 password 가져오기 위해 init 메서드로 user객체 생성
