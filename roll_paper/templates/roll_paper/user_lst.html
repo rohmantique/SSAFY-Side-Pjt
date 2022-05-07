@@ -15,9 +15,17 @@
     {% endfor %}
   </ul>
 
-  <header class="m-5">
-    <h2>편지를 보내고 싶은 사람을 눌러주세요!</h2>
-  </header>
+  {% if empty %}
+    <header class="m-5">
+      <h2>당신은 혹시 서울 1반 인싸?! 🤩</h2>
+    </header>
+    <h3>현재 가입한 모든 서울 1반 사람들에게 편지를 보냈어요.</h3>
+    <h3>아직 가입하지 않은 사람들에게 저희 사이트 홍보 해주실꺼죠? (내심기대)</h3>
+  {% else %}
+    <header class="m-5">
+      <h2>누구에게 편지를 써볼까요?</h2>
+    </header>
+  {% endif %}
 
   {% for user in user_lst %}
     {% if user.realname != request.user.realname and user not in excepted %}
@@ -25,14 +33,6 @@
         <button>{{ user.realname }}</button><br>
       </form>
     {% endif %}
-    {% endfor %}
-
-    {% if empty %}
-    <h3>
-      현재 가입한 모든 사용자에게 편지를 썼네요!
-      아직 편지를 보내지 못한 사람이 있다면, 상대방이 가입할 때 까지 조금만 기다려 보아요~
-    </h3>
-    {% endif %}
-
+  {% endfor %}  
 
 {% endblock content %}

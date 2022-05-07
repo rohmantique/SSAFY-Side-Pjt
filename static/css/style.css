@@ -22,11 +22,11 @@ h2 {
 }
 
 p {
-  font-size: 1.25rem;
+  font-size: 1.45rem;
 } 
 
 a {
-  font-size: 1.25rem;
+  font-size: 1.45rem;
 }
 
 @media screen and (max-width : 768px){ 
@@ -37,22 +37,36 @@ a {
   html {font-size: 10px}
 }
 
+.btn:focus, .btn:active, .form-control:focus, .form-control:active {
+  outline: none !important;
+  box-shadow: none;
+}
+
 input {
   background-color: #555CF1 !important;
   border-style: none !important;
   color: white !important;
+  font-size: 1.45rem !important;
+}
+
+textarea {
+  font-size: 1.45rem !important;
 }
 
 .mybtn {
   background-color: #FFC90E  !important;
   color: #555CF1 !important;
   font-weight: bold; /*희진이 추가*/
-  
 }
 
-.btn:focus, .btn:active, .form-control:focus, .form-control:active {
-  outline: none !important;
-  box-shadow: none;
+.dangerbtn {
+  background-color: #d52d3e !important;
+  color: beige !important;
+  font-weight: bold;
+}
+
+.letter-title {
+  font-size: larger;
 }
 
 .accounts-container{
@@ -65,6 +79,14 @@ input {
 }
 
 .hello-user {
-  color: #b5a5f1;
-  font-size: large;
+  color: white;
+  font-size: medium;
+}
+
+.textYellow {
+  color: #FFC90E;
+}
+
+.textBlue {
+  color: #555CF1;
 }
