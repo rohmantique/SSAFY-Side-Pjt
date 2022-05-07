@@ -21,6 +21,14 @@ h2 {
   text-align: center;
 }
 
+h3 {
+  font-size: 2.2rem;
+}
+
+h4 {
+  font-size: 1.8rem;
+}
+
 p {
   font-size: 1.45rem;
 } 
@@ -39,7 +47,7 @@ a {
 
 .btn:focus, .btn:active, .form-control:focus, .form-control:active .navbar-toggler:focus, .navbar-toggler:focus {
   outline: none !important;
-  box-shadow: none;
+  box-shadow: none !important;
 }
 
 input {
@@ -49,9 +57,10 @@ input {
   font-size: 1.45rem !important;
 }
 
-textarea {
+.letter-content {
   font-size: 1.45rem !important;
   background-color: #d3eaff !important;
+  border: none !important;
 }
 
 .btn {
@@ -73,7 +82,6 @@ textarea {
 }
 
 .letter-title {
-  font-size: larger;
   color: black !important;
   background-color: #d3eaff !important;
 }
@@ -83,13 +91,13 @@ textarea {
   margin: 0 auto;
 }
 
-.myClass {
-  background-color: #555CF1;
+.letter-container {
+  max-width: 500px;
+  margin: 0 auto;
 }
 
-.hello-user {
-  color: white;
-  font-size: medium;
+.myClass {
+  background-color: #555CF1;
 }
 
 .textYellow {

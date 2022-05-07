@@ -1,18 +1,32 @@
 {% extends 'base.html' %}
 
+{% block style %}
+  img {
+    width: 100%;
+    max-width: 800px;
+  }
+
+  .letter-footer {
+    margin-left: 0 auto;
+  }
+
+{% endblock style %}
+
 {% block content %}
   <header class="m-5">
     <h2>{{ from }}에게 온 편지</h2>
   </header>
 
-  <div>
-    <strong>{{ rollpaper.title }}</strong>
-  </div>
-  <div>
-    {{ rollpaper.content }}
-  </div>
-  <div>
-    From. {{ from }}
-  </div>
+  <main style="float:right; width:100%;">
+    <div class="letter-header d-flex justify-content-center">
+      <h3>{{ rollpaper.title }}</h3>
+    </div>
+    <div class="letter-body d-flex justify-content-center" style="width:65%;">
+      <p>{{ rollpaper.content }}</p>
+    </div>
+    <div class="letter-footer d-flex justify-content-end mt-5" style="width:95%;">
+      <img src="/static/images/letters.PNG" alt="Letter Image">
+    </div>
+  </main>
 
 {% endblock content %}
