@@ -22,15 +22,14 @@
     <div class="container-fluid">
       <a href="{% url 'rollpaper:aboutus' %}" class="navbar-brand btn btn-light px-2 fw-bold">소개</a>
       <button class="navbar-toggler border-2 border-light" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-        {% comment %} <span class="navbar-toggler-icon bg-light"></span> {% endcomment %}
         <i class="bi bi-justify text-light"></i>
       </button>
       <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
         {% if request.user.is_authenticated %}
           <div class="navbar-nav">
             <a href="{% url 'accounts:update' %}" class="btn btn-light p-1 mx-1">내 계정</a>
-            <form action="{% url 'rollpaper:letterbox' user.pk %}" method='GET'>
-              <button class="btn btn-light p-1 mx-1">편지함</button>
+            <form action="{% url 'rollpaper:letterbox' user.pk %}" method='GET' class="d-inline-block">
+              <button class="d-inline-block btn btn-light p-1 mx-1">편지함</button>
             </form>
             <form action="{% url 'rollpaper:userlst' %}" method='GET'>
               <button class="btn btn-light p-1 mx-1">편지쓰기</button>
@@ -58,7 +57,7 @@
     {% endblock content %}
   </div>
 
-  <!-- Signup Modal -->
+  <!-- Signup Modal (accounts/signup.html) -->
   <div class="modal fade" id="signupModal" tabindex="-1" aria-labelledby="signupModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
@@ -73,6 +72,25 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn mybtn" data-bs-dismiss="modal">알겠어요</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Letter Delete Modal (roll_paper/update.html)-->
+  <div class="modal fade" id="letterDeleteModal" tabindex="-1" aria-labelledby="letterDeleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title fw-bold" id="letterDeleteModal">Why . . .</h5>
+        </div>
+        <div class="modal-body">
+          <p>정말로 삭제하시겠습니까?</p>
+          <p>편지가 삭제되어 복구할 수 없게됩니다. '뭘 굳이,,' 라는 마음을 넘어 1학기 동안 고생한 동기에게 짧은 인삿말이라도 보내보세요-!</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn mybtn" data-bs-dismiss="modal">휴, 잘못누름</button>
+          <button type="button" class="btn dangerbtn">미안하다.. 부끄럽다</button>
         </div>
       </div>
     </div>

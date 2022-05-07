@@ -2,18 +2,20 @@
 
 {% block content %}
   <header class="m-5">
-    <h2>편지 수정</h2>
+    <h2>마음이 바뀌셨나요? 내용을 수정해보세요</h2>
   </header>
 
-  <form action="" method = 'POST'>
-    {% csrf_token %}
-    {{form.as_p}}
-    <button>수정 완료</button>
-  </form>
-
-  <form action="{% url 'rollpaper:delete' user.pk realname%}" method = 'POST'>
-    {% csrf_token %}
-    <button>편지 삭제</button>
-  </form>
+  <div class="accounts-continer mt-3">
+    <form action="" method = 'POST'>
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button class="btn mybtn" style="float: left">검토 완료</button>
+    </form>
+  
+    <form action="{% url 'rollpaper:delete' user.pk realname %}" method = 'POST'>
+      {% csrf_token %}
+      <button type="button" class="btn mybtn" style="float: right" data-bs-toggle="modal" data-bs-target="#letterDeleteModal">안 보낼래</button>
+    </form>
+  </div>
 
 {% endblock content %}
