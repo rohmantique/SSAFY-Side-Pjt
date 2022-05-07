@@ -16,6 +16,26 @@
     <form action="{% url 'rollpaper:delete' user.pk realname %}" method = 'POST'>
       {% csrf_token %}
       <button type="button" class="btn mybtn" style="float: right" data-bs-toggle="modal" data-bs-target="#letterDeleteModal">안 보낼래</button>
+      
+      <!-- Letter Delete Modal (roll_paper/update.html)-->
+      <div class="modal fade" id="letterDeleteModal" tabindex="-1" aria-labelledby="letterDeleteModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title fw-bold" id="letterDeleteModal">Why . . .</h5>
+            </div>
+            <div class="modal-body">
+              <p>정말로 삭제하시겠습니까?</p>
+              <p>편지가 삭제되어 복구할 수 없게됩니다. '뭘 굳이,,' 라는 마음을 넘어 1학기 동안 고생한 동기에게 짧은 인삿말이라도 보내보세요-!</p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn mybtn" data-bs-dismiss="modal">휴, 잘못누름</button>
+              <button type="submit" class="btn dangerbtn">미안하다.. 부끄럽다</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
     </form>
   </div>
 
