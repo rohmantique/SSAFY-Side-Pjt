@@ -99,3 +99,7 @@ textarea {
 .textBlue {
   color: #555CF1;
 }
+
+li {
+  list-style-type: '📌 ';
+}

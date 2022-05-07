@@ -2,17 +2,16 @@
 
 {% block content %}
   <header class="m-5">
-    <h2>편지 쓰기</h2>
+    <h2>너를 만나...</h2>
   </header>
 
   <form action="" method = 'POST'>
     {% csrf_token %}
     {{form.as_p}}
-    <button class="btn mybtn">편지 보내기</button>
+    <button class="btn mybtn" style="float: right">보내기</button>
   </form>
   <form action="{% url 'rollpaper:userlst' %}" method='GET'>
     <button class="btn mybtn">다음에 쓸래</button>
   </form>
-
 
 {% endblock content %}
