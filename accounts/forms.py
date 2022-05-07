@@ -18,6 +18,7 @@ class CustomUserCreationForm(UserCreationForm):
         widget=forms.TextInput(
             attrs={
                 'class': 'form-control',
+                'id': 'username',
             }
         )
     )
@@ -84,6 +85,7 @@ class CustomAuthenticationForm(AuthenticationForm):
             attrs={
                 'autofocus': True,
                 'class': 'form-control',
+                'id': 'username',
                 }),
     )
     password = forms.CharField(

@@ -36,7 +36,19 @@
     const onlyKorean = function() {
       const pattern = /[a-z0-9]|[ \[\]{}()<>?|`~!@#$%^&*-_+=,.;:\"'\\]/g
       this.value = this.value.replace(pattern, '')
+
     }
     name.addEventListener('keypress', onlyKorean)
+
+    {% comment %} 이거 수정해야함 {% endcomment %}
+    {% comment %} 아이디 input에 영어만 입력받게 js 설정 {% endcomment %}
+    const username = document.querySelector('input#username')
+    const onlyEnglish = function() {
+      const pattern2 = /[ㄱ-ㅎㅏ-ㅣ가-힣]|[ \[\]{}()<>?|`~!@#$%^&*-_+=,.;:\"'\\]/g
+      this.value = this.value.replace(pattern2, '')
+      console.log('되나요?')
+    }
+    username.addEventListener('keypress', onlyEnglish)
+
   </script>
 {% endblock script %}
