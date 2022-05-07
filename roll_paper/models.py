@@ -3,7 +3,7 @@ from django.conf import settings
 # Create your models here.
 
 class RollPaper(models.Model):
-    title = models.CharField(max_length = 100)
+    title = models.CharField(max_length = 35)
     content = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)

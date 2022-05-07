@@ -9,7 +9,7 @@
 
 
   {% for rollpaper in my_rollpaper %}
-    <a href="{% url 'rollpaper:detail' user.pk rollpaper.pk %}">{{ rollpaper.title }}</a>
+    <a href="{% url 'rollpaper:detail' user.pk rollpaper.pk %}" class="btn userName p-0">* {{ rollpaper.title }}</a>
   {% endfor %}
 
 {% endblock content %}
