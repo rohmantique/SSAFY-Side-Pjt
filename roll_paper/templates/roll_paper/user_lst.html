@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
-  <ul class="messages list-unstyled">
+  {% comment %} <ul class="messages list-unstyled">
     {% for message in messages %}
     <li
       {% if message.tags == 'info' %} 
@@ -13,7 +13,7 @@
       {{ message }}
     </li>
     {% endfor %}
-  </ul>
+  </ul> {% endcomment %}
 
   {% if empty %}
     <header class="m-5">
