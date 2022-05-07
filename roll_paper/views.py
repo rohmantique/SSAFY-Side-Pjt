@@ -62,8 +62,7 @@ def write(request, realname):
             rollpaper.user2 = request.user
             rollpaper.save()
 
-            messages.add_message(request, messages.INFO, f'{realname[1:]}에게 마음 sent!')
-            return redirect('rollpaper:userlst')
+            return redirect('rollpaper:complete')
 
     else:
         if request.user == receiver:
@@ -76,6 +75,8 @@ def write(request, realname):
     }
     return render(request, 'roll_paper/write.html', context)
 
+def complete(request):
+    return render(request, 'roll_paper/complete.html')
 
 @login_required
 @require_GET

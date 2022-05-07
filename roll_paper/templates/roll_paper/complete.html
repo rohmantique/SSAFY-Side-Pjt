@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<header class="m-5">
+  <h2 >편지를 성공적으로 보냈어요!</h2>
+</header>
+<div class="container d-flex justify-content-center">
+  <a href="{% url 'rollpaper:userlst' %}" style="text-decoration:none">
+    <h3>다른 사람한테 또 쓰러가기!🏃‍♀️🏃‍♂️</h3>
+  </a>
+</div>
+{% endblock content %}
+
