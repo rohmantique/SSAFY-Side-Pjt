@@ -95,7 +95,7 @@ class CustomAuthenticationForm(AuthenticationForm):
                 'class': 'form-control'}),
     )
 
-class ChangePasswordForm(PasswordChangeForm):
+class CustomPasswordChangeForm(PasswordChangeForm):
     password1=forms.CharField(
         label='기존 비밀번호',
         strip=False,

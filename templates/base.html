@@ -14,32 +14,41 @@
   <style>
     {% block style %}
     {% endblock %}
+    .navitem {
+      color: white;
+      text-decoration: none;
+      font-size: 1.25rem;
+    }
+
+    .navitem:hover {
+      font-weight: bold !important;
+      color: white !important;
+    }
+
+    .navbar-brand {
+      font-size: 1.4rem;
+    }
   </style>
 </head>
 <body>
 
   <nav id="navbar" class="navbar navbar-expand-md navbar-light myClass p-1">
     <div class="container-fluid">
-      <a href="{% url 'rollpaper:aboutus' %}" class="navbar-brand btn btn-light px-2 fw-bold">소개</a>
+      <a href="{% url 'rollpaper:main' %}" class="navbar-brand px-2 fw-bold" style="color: #FFC90E;">서울1반 추억쌓피</a>
       <button class="navbar-toggler border-2 border-light" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
         <i class="bi bi-justify text-light"></i>
       </button>
-      <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
+      <div class="collapse navbar-collapse justify-content-end" style="color:white" id="navbarNavAltMarkup">
         {% if request.user.is_authenticated %}
           <div class="navbar-nav">
-            <a href="{% url 'accounts:update' %}" class="btn btn-light p-1 mx-1">내 계정</a>
-            <form action="{% url 'rollpaper:letterbox' user.pk %}" method='GET' class="d-inline-block">
-              <button class="d-inline-block btn btn-light p-1 mx-1">편지함</button>
-            </form>
-            <form action="{% url 'rollpaper:userlst' %}" method='GET'>
-              <button class="btn btn-light p-1 mx-1">편지쓰기</button>
-            </form>
-            <form action="{% url 'rollpaper:sentletter' user.pk %}" method='GET'>
-              <button class="btn btn-light p-1 mx-1">내가 쓴 편지</button>
-            </form>
+            <a href="{% url 'rollpaper:aboutus' %}" class="navitem d-inline-block p-1 mx-1">소개</a>
+            <a href="{% url 'accounts:update' %}" class="navitem d-inline-block p-1 mx-1">내 계정</a>
+            <a href="{% url 'rollpaper:letterbox' user.pk %}" class="navitem d-inline-block p-1 mx-1">편지함</a>
+            <a href="{% url 'rollpaper:userlst' %}" class="navitem d-inline-block p-1 mx-1">편지쓰기</a>
+            <a href="{% url 'rollpaper:sentletter' user.pk %}" class="navitem d-inline-block p-1 mx-1">내가 쓴 편지</a>
             <form action="{% url 'accounts:logout' %}" method="POST">
               {% csrf_token %}
-              <button class="btn btn-light p-1 mx-1">로그아웃</button>
+              <a style="text-decoration:none" class="navitem d-inline-block p-1 mx-1">로그아웃</a>
             </form>
           </div>
         {% else %}
