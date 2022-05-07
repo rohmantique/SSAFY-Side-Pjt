@@ -28,6 +28,17 @@
     .navbar-brand {
       font-size: 1.4rem;
     }
+
+    .navbar-button {
+      all: unset;
+      color: white;
+      font-size: 1.3rem;
+    }
+
+    .navbar-button:hover {
+      font-weight: bold !important;
+      color: white !important;
+    }
   </style>
 </head>
 <body>
@@ -48,13 +59,13 @@
             <a href="{% url 'rollpaper:sentletter' user.pk %}" class="navitem d-inline-block p-1 mx-1">내가 쓴 편지</a>
             <form action="{% url 'accounts:logout' %}" method="POST">
               {% csrf_token %}
-              <a style="text-decoration:none" class="navitem d-inline-block p-1 mx-1">로그아웃</a>
+              <button class="navbar-button d-inline-block p-1 mx-1">로그아웃</button>
             </form>
           </div>
         {% else %}
           <div class="navbar-nav">
-            <a href="{% url 'accounts:signup' %}" class="nav-link btn btn-light p-1 mx-1">회원가입</a>
-            <a href="{% url 'accounts:login' %}" class="nav-link btn btn-light p-1 mx-1">로그인</a>
+            <a href="{% url 'accounts:signup' %}" class="navitem d-inline-block p-1 mx-1">회원가입</a>
+            <a href="{% url 'accounts:login' %}" class="navitem d-inline-block p-1 mx-1">로그인</a>
           </div>
         {% endif %}
       </div>
