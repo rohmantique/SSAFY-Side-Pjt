@@ -29,7 +29,7 @@ def aboutus(request):
 @login_required
 @require_GET
 def userlst(request):
-    user_lst = User.objects.all()
+    user_lst = User.objects.all().order_by('realname')
     excepted = []
 
     for user in user_lst[:]:
