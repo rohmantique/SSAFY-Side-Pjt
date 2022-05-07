@@ -59,3 +59,12 @@ input {
   width: 30rem;
   margin: 0 auto;
 }
+
+.myClass {
+  background-color: #555CF1;
+}
+
+.hello-user {
+  color: #b5a5f1;
+  font-size: large;
+}
