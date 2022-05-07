@@ -16,7 +16,11 @@ from django.contrib.auth import (
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.http import require_http_methods, require_POST
 
-from .forms import CustomAuthenticationForm, CheckPasswordForm
+from .forms import (
+    CustomAuthenticationForm, 
+    CheckPasswordForm,
+    ChangePasswordForm,
+)
 
 # Create your views here.
 @require_http_methods(['GET', 'POST'])
@@ -92,16 +96,15 @@ def update(request):
     return render(request, 'accounts/update.html', context)
 
 @login_required
-@require_http_methods(['GET', 'POST'])
 def change_password(request):
     if request.method == 'POST':
-        form2 = PasswordChangeForm(request.user, request.POST)
+        form2 = ChangePasswordForm(request.user, request.POST)
         if form2.is_valid():
             form2.save()
             update_session_auth_hash(request, form2.user)
             return redirect('accounts:update')
     else:
-        form2 = PasswordChangeForm(user=request.user)
+        form2 = ChangePasswordForm(user=request.user)
 
     context = {
         'form2': form2,

@@ -46,9 +46,17 @@ input {
 .mybtn {
   background-color: #FFC90E  !important;
   color: #555CF1 !important;
+  font-weight: bold; /*희진이 추가*/
+  
 }
 
 .btn:focus, .btn:active, .form-control:focus, .form-control:active {
   outline: none !important;
   box-shadow: none;
+}
+
+.accounts-container{
+  width: 30rem;
+  margin: 0 auto;
+
 }
