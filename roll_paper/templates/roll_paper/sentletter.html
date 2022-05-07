@@ -2,10 +2,29 @@
 
 {% block content %}
 
+<ul class="messages list-unstyled">
+  {% for message in messages %}
+  <li 
+    {% if message.tags == 'error' %}
+    class="alert alert-danger"
+
+    {% endif %}
+  >
+    <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Info:"><use xlink:href="#info-fill"/></svg>
+    {{ message }}
+  </li>
+  {% endfor %}
+</ul>
+
+
+
 <h2>내가 보낸 편지들</h2>
 
 {% for rollpaper in sentrollpaper %}
 <a href="{% url 'rollpaper:update' user.pk rollpaper.user.realname %}">{{ rollpaper.user.realname }}</a>
 {% endfor %}
+
+
+
 
 {% endblock content %}

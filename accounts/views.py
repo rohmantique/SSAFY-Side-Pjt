@@ -7,7 +7,6 @@ from .forms import (
     CustomUserCreationForm, 
     CustomUserChangeForm
 )
-from django.contrib import messages
 from django.contrib.auth import (
     login as auth_login,
     logout as auth_logout,
@@ -15,11 +14,12 @@ from django.contrib.auth import (
     update_session_auth_hash,
 )
 from django.contrib.auth.decorators import login_required
-from django.views.decorators.http import require_POST
+from django.views.decorators.http import require_http_methods, require_POST
 
 from .forms import CustomAuthenticationForm, CheckPasswordForm
 
 # Create your views here.
+@require_http_methods(['GET', 'POST'])
 def signup(request):
 
     if request.user.is_authenticated:
@@ -39,6 +39,8 @@ def signup(request):
 
     return render(request, 'accounts/signup.html', context)
 
+
+@require_http_methods(['GET', 'POST'])
 def login(request):
 
     if request.method == 'POST':
@@ -68,22 +70,29 @@ def logout(request):
     return redirect('rollpaper:index')
 
 @login_required
+@require_http_methods(['GET', 'POST'])
 def update(request):
 
     if request.method == 'POST':
         form1 = CustomUserChangeForm(request.POST, instance=request.user)
+        password_form = CheckPasswordForm(request.user, request.POST)
         if form1.is_valid():
-            form1.save()
-            return redirect('rollpaper:index')
+            if password_form.is_valid():
+                form1.save()
+                return redirect('rollpaper:index')
+
     else:
         form1 = CustomUserChangeForm(instance=request.user)
+        password_form = CheckPasswordForm(request.user)
 
     context = {
         'form1': form1,
+        'password_form': password_form
     }
     return render(request, 'accounts/update.html', context)
 
 @login_required
+@require_http_methods(['GET', 'POST'])
 def change_password(request):
     if request.method == 'POST':
         form2 = PasswordChangeForm(request.user, request.POST)
@@ -100,6 +109,7 @@ def change_password(request):
     return render(request, 'accounts/change_password.html', context)
 
 @login_required
+@require_http_methods(['GET', 'POST'])
 def user_delete(request):
 
     if request.method == 'POST':
