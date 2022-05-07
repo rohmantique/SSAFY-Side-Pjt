@@ -18,45 +18,45 @@
 </head>
 <body>
 
-  <nav id="navbar" class="myClass">
-    {% if request.user.is_authenticated %}
-    <p>{{ user.realname }}님, 안녕하세요!</p>
-      <li>
-        <form action="{% url 'accounts:logout' %}" method="POST">
-          {% csrf_token %}
-          <button>로그아웃</button>
-        </form>
-      </li>
-      <li>
-        <a href="{% url 'accounts:update' %}">내 계정</a>
-      </li>
-      <li>
-        <form action="{% url 'rollpaper:letterbox' user.pk %}" method='GET'>
-          <button>편지함</button>
-        </form>
-        <form action="{% url 'rollpaper:userlst' %}" method='GET'>
-          <button>편지쓰기</button>
-        </form>
-        <form action="{% url 'rollpaper:sentletter' user.pk %}" method='GET'>
-          <button>내가 쓴 편지</button>
-        </form>
-        <hr>
-      </li>
-    {% else %}
-      <li>
-        <a href="{% url 'accounts:signup' %}">회원가입</a>
-      </li>
-      <li>
-        <a href="{% url 'accounts:login' %}">로그인</a>
-      </li>
-    {% endif %}
+  <nav id="navbar" class="navbar navbar-expand-md navbar-light myClass p-1">
+    <div class="container-fluid">
+      <a href="{% url 'rollpaper:aboutus' %}" class="navbar-brand btn btn-light px-2 fw-bold">소개</a>
+      <button class="navbar-toggler border-2 border-light" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        {% comment %} <span class="navbar-toggler-icon bg-light"></span> {% endcomment %}
+        <i class="bi bi-justify text-light"></i>
+      </button>
+      <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
+        {% if request.user.is_authenticated %}
+          <div class="navbar-nav">
+            <a href="{% url 'accounts:update' %}" class="btn btn-light p-1 mx-1">내 계정</a>
+            <form action="{% url 'rollpaper:letterbox' user.pk %}" method='GET'>
+              <button class="btn btn-light p-1 mx-1">편지함</button>
+            </form>
+            <form action="{% url 'rollpaper:userlst' %}" method='GET'>
+              <button class="btn btn-light p-1 mx-1">편지쓰기</button>
+            </form>
+            <form action="{% url 'rollpaper:sentletter' user.pk %}" method='GET'>
+              <button class="btn btn-light p-1 mx-1">내가 쓴 편지</button>
+            </form>
+            <form action="{% url 'accounts:logout' %}" method="POST">
+              {% csrf_token %}
+              <button class="btn btn-light p-1 mx-1">로그아웃</button>
+            </form>
+          </div>
+        {% else %}
+          <div class="navbar-nav">
+            <a href="{% url 'accounts:signup' %}" class="nav-link btn btn-light p-1 mx-1">회원가입</a>
+            <a href="{% url 'accounts:login' %}" class="nav-link btn btn-light p-1 mx-1">로그인</a>
+          </div>
+        {% endif %}
+      </div>
+    </div>
   </nav>
 
   <div class="container">
     {% block content %}
     {% endblock content %}
   </div>
-
 
   <!-- Signup Modal -->
   <div class="modal fade" id="signupModal" tabindex="-1" aria-labelledby="signupModalLabel" aria-hidden="true">
@@ -80,7 +80,6 @@
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
   
-
   {% block script %}
   {% endblock script %}
 </body>
