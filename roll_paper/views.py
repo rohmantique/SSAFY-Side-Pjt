@@ -33,8 +33,8 @@ def userlst(request):
     excepted = []
 
     for user in user_lst[:]:
-        a = RollPaper.objects.filter(user2=request.user, user=user)
-        if a :
+        person = RollPaper.objects.filter(user2=request.user, user=user)
+        if person:
             excepted.append(user)
     
     empty = 0
@@ -89,7 +89,8 @@ def letterbox(request, user_pk):
         context = {
             'my_rollpaper': my_rollpaper,
             'user_info': user_info,
-            'number':number
+            'number':number,
+            'realname': user_info.realname[1:],
         }
         return render(request, 'roll_paper/letterbox.html', context)
     return render(request, 'roll_paper/error.html')

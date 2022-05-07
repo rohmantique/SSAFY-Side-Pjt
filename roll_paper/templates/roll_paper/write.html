@@ -8,10 +8,10 @@
   <form action="" method = 'POST'>
     {% csrf_token %}
     {{form.as_p}}
-    <button>편지 보내기</button>
+    <button class="btn mybtn">편지 보내기</button>
   </form>
   <form action="{% url 'rollpaper:userlst' %}" method='GET'>
-    <button>다음에 쓸래</button>
+    <button class="btn mybtn">다음에 쓸래</button>
   </form>
 
 

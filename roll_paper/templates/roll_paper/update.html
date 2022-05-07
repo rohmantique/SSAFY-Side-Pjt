@@ -2,14 +2,15 @@
 
 {% block content %}
   <header class="m-5">
-    <h2>마음이 바뀌셨나요? 내용을 수정해보세요</h2>
+    <h2>마음이 바뀌셨나요?</h2>
+    <h2>내용을 수정해보세요</h2>
   </header>
 
   <div class="accounts-continer mt-3">
     <form action="" method = 'POST'>
       {% csrf_token %}
       {{ form.as_p }}
-      <button class="btn mybtn" style="float: left">검토 완료</button>
+      <button class="btn mybtn" style="float: left">이대로 저장</button>
     </form>
   
     <form action="{% url 'rollpaper:delete' user.pk realname %}" method = 'POST'>

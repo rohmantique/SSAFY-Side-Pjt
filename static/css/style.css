@@ -37,7 +37,7 @@ a {
   html {font-size: 10px}
 }
 
-.btn:focus, .btn:active, .form-control:focus, .form-control:active {
+.btn:focus, .btn:active, .form-control:focus, .form-control:active .navbar-toggler:focus, .navbar-toggler:focus {
   outline: none !important;
   box-shadow: none;
 }
@@ -51,12 +51,16 @@ input {
 
 textarea {
   font-size: 1.45rem !important;
+  background-color: #d3eaff !important;
+}
+
+.btn {
+  font-size: 1.5rem !important;
 }
 
 .mybtn {
-  background-color: #FFC90E  !important;
+  background-color: #FFC90E !important;
   color: #555CF1 !important;
-  font-weight: bold; /*희진이 추가*/
 }
 
 .dangerbtn {
@@ -65,12 +69,18 @@ textarea {
   font-weight: bold;
 }
 
+.userName:hover {
+  transform: scale(1.25);
+}
+
 .letter-title {
   font-size: larger;
+  color: black !important;
+  background-color: #d3eaff !important;
 }
 
 .accounts-container{
-  width: 30rem;
+  width: 21rem;
   margin: 0 auto;
 }
 
