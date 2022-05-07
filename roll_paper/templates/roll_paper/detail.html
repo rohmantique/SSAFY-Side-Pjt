@@ -1,16 +1,18 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h2>{{ from }}에게 온 편지</h2>
-<div>
-  <strong>{{ rollpaper.title }}</strong>
-</div>
-<div>
-  {{ rollpaper.content }}
-</div>
-<div>
-  From. {{ from }}
-</div>
+  <header class="m-5">
+    <h2>{{ from }}에게 온 편지</h2>
+  </header>
 
+  <div>
+    <strong>{{ rollpaper.title }}</strong>
+  </div>
+  <div>
+    {{ rollpaper.content }}
+  </div>
+  <div>
+    From. {{ from }}
+  </div>
 
 {% endblock content %}

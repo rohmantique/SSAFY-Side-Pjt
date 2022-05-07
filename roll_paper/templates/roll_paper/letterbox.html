@@ -1,13 +1,16 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>letterbox</h1>
-<h2>{{ user_info.realname }}님께 온 {{number}}개의 편지를 확인해보세요!!</h2>
+  <header class="m-5">
+    <h2>편지함📫</h2>
+  </header>
+
+  <h3>{{ user_info.realname }}님께 온 {{number}}개의 편지를 확인해보세요!!</h3>
 
 
-{% for rollpaper in my_rollpaper %}
-<a href="{% url 'rollpaper:detail' user.pk rollpaper.pk %}">{{ rollpaper.title }}</a>
-{% endfor %}
+  {% for rollpaper in my_rollpaper %}
+  <a href="{% url 'rollpaper:detail' user.pk rollpaper.pk %}">{{ rollpaper.title }}</a>
+  {% endfor %}
 
 
 {% endblock content %}
