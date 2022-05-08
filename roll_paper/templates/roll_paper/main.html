@@ -1,7 +1,42 @@
 {% extends 'base.html' %}
 
+{% block style %}
+@media(max-width: 991px) {
+  .container {
+      background-image: url('../../static/images/main2.PNG');
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: top;
+    }
+}  
+
+@media(min-width: 992px) {
+  .container {
+    background-image: url('../../static/images/main_pc.PNG');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: top;
+  }
+
+  .mobile {
+    display: none;
+  }
+}
+
+{% endblock style %}
+
 {% block content %}
-  <header class="m-5">
-    <h2>1학기 동안 수고하셨습니다!</h2>
+  <header class="m-5 text-center">
+    <h3>1학기 동안 다들</h3>
+    <h3>너무 수고 많으셨습니다!</h3>
   </header>
+
+  <main class="my-5 mx-2">
+    <div class="my-5 p-5"></div>
+    <div class="my-5 p-5"></div>
+    <div class="my-5 p-5"></div>
+    <div class="my-5 p-5 mobile"></div>
+    <div class="my-5 p-5 mobile"></div>
+    <div class="my-5 p-5 mobile"></div>
+  </main>
 {% endblock content %}
