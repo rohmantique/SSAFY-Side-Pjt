@@ -15,7 +15,7 @@ class RollPaperForm(forms.ModelForm):
         label='',
         widget=forms.Textarea(
             attrs={
-                'class': 'form-control',
+                'class': 'form-control letter-content',
             }
         )
     )

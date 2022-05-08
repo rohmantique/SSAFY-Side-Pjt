@@ -10,6 +10,11 @@
     margin-left: 0 auto;
   }
 
+  @media screen and (min-width : 992px){ 
+    .letter-body {
+      max-width: 500px;
+    }
+  }
 {% endblock style %}
 
 {% block content %}
@@ -17,14 +22,14 @@
     <h2>{{ from }}에게 온 편지</h2>
   </header>
 
-  <main style="float:right; width:100%;">
+  <main class="ps-5 me-4">
     <div class="letter-header d-flex justify-content-center">
       <h3>{{ rollpaper.title }}</h3>
     </div>
-    <div class="letter-body d-flex justify-content-center" style="width:65%;">
+    <div class="letter-body" style="width:80%; margin:0 auto;">
       <p>{{ rollpaper.content }}</p>
     </div>
-    <div class="letter-footer d-flex justify-content-end mt-5" style="width:95%;">
+    <div class="letter-footer mt-2" style="float:right;">
       <img src="/static/images/letters.PNG" alt="Letter Image">
     </div>
   </main>
