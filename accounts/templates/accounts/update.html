@@ -9,12 +9,13 @@
     <form action="" method = 'POST'>
       {% csrf_token %}
       {{form1.as_p}}
+      {{password_form.as_p}}
       <div class="d-flex justify-content-between">
         <a href="{% url 'rollpaper:main' %}" class="btn mybtn">뒤로가기</a>
         <button class="btn mybtn">수정 완료</button>
       </div>
-      
     </form>
+      
     <hr>
     <a href="{% url 'accounts:change_password' %}" class="btn mybtn">비밀번호 변경</a>
     <a href="{% url 'accounts:user_delete' %}" class="btn mybtn">회원 탈퇴</a>
