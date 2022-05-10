@@ -162,5 +162,5 @@ def delete(request, user_pk, realname):
     receiver = get_object_or_404(get_user_model(), realname=realname)
     sentrollpaper = RollPaper.objects.filter(user = receiver, user2=request.user)
     sentrollpaper.delete()
-    messages.add_message(request, messages.ERROR, '편지가 성공적으로 삭제되었습니다!')
+    messages.add_message(request, messages.ERROR, '편지가 성공적으로 삭제되었습니다! 감성의 추진력을 얻기 위함인가요?')
     return redirect('rollpaper:sentletter', user_pk)

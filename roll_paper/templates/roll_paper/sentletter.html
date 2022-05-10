@@ -2,14 +2,13 @@
 
 {% block content %}
 
-  <ul class="messages list-unstyled">
+  <ul class="messages list-unstyled m-2">
     {% for message in messages %}
       <li 
         {% if message.tags == 'error' %}
-        class="alert alert-danger"
+        class="alert p-0"
         {% endif %}
       >
-        <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Info:"><use xlink:href="#info-fill"/></svg>
         {{ message }}
       </li>
     {% endfor %}
