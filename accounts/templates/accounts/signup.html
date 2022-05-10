@@ -31,24 +31,21 @@
     const navbar = document.querySelector('nav#navbar')
     navbar.setAttribute('class', 'd-none')
   
-    {% comment %} 이름 input에 한글만 입력받게 js 설정 {% endcomment %}
-    const name = document.querySelector('input#realname')
+    <!-- realname input에 영어만 입력받게 js 설정 -->
+    const realname = document.querySelector('input#realname')
     const onlyKorean = function() {
       const pattern = /[a-z0-9]|[ \[\]{}()<>?|`~!@#$%^&*-_+=,.;:\"'\\]/g
       this.value = this.value.replace(pattern, '')
-
     }
-    name.addEventListener('keypress', onlyKorean)
-
-    {% comment %} 이거 수정해야함 {% endcomment %}
-    {% comment %} 아이디 input에 영어만 입력받게 js 설정 {% endcomment %}
+    realname.addEventListener('keyup', onlyKorean)
+ 
+    <!-- username input에 영어만 입력받게 js 설정 -->
     const username = document.querySelector('input#username')
     const onlyEnglish = function() {
       const pattern2 = /[ㄱ-ㅎㅏ-ㅣ가-힣]|[ \[\]{}()<>?|`~!@#$%^&*-_+=,.;:\"'\\]/g
       this.value = this.value.replace(pattern2, '')
-      console.log('되나요?')
     }
-    username.addEventListener('keypress', onlyEnglish)
+    username.addEventListener('keyup', onlyEnglish)
 
   </script>
 {% endblock script %}
