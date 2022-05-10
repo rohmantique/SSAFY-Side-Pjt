@@ -21,6 +21,7 @@ from .forms import (
     CheckPasswordForm,
     CustomPasswordChangeForm,
 )
+from roll_paper.models import RollPaper
 
 # Create your views here.
 @require_http_methods(['GET', 'POST'])
@@ -73,6 +74,7 @@ def logout(request):
     auth_logout(request)
     return redirect('rollpaper:index')
 
+
 @login_required
 @require_http_methods(['GET', 'POST'])
 def update(request):
@@ -82,7 +84,12 @@ def update(request):
         password_form = CheckPasswordForm(request.user, request.POST)
         if form1.is_valid():
             if password_form.is_valid():
-                form1.save()
+                updated = form1.save(commit=False)
+                my_sent_rollpaper = RollPaper.objects.filter(user2=request.user)
+                for rollpaper in my_sent_rollpaper:
+                    rollpaper.nickname = updated.nickname
+                    rollpaper.save()
+                updated.save()
                 return redirect('rollpaper:index')
 
     else:
@@ -94,6 +101,7 @@ def update(request):
         'password_form': password_form
     }
     return render(request, 'accounts/update.html', context)
+
 
 @login_required
 def change_password(request):
@@ -130,6 +138,3 @@ def user_delete(request):
     }
 
     return render(request, 'accounts/user_delete.html', context)
-
-
-
