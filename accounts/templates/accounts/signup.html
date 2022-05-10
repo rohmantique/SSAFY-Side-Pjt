@@ -16,10 +16,10 @@
     <form action="" method='POST'>
       {% csrf_token %}
       {{ form.as_p }}
-      <button class="btn accountbtn" style="float: right;">완료</button>
+      <button class="btn mybtn" style="float: right;">완료</button>
     </form>
     <div>
-      <a href="{% url 'rollpaper:index' %}" class="btn accountbtn">뒤로가기</a>
+      <a href="{% url 'rollpaper:index' %}" class="btn mybtn">뒤로가기</a>
     </div>
 
   </div>
