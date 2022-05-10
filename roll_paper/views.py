@@ -142,11 +142,13 @@ def update(request, user_pk, realname):
 def sentletter(request, user_pk):
     writer = get_object_or_404(get_user_model(), pk=user_pk)
     if request.user == writer:
-        user_info = request.user
         sentrollpaper = RollPaper.objects.filter(user2=request.user)
+        realname = []
+        for rollpaper in sentrollpaper:
+            realname.append(rollpaper.user.realname)
+        realname.sort()
         context = {
-            'sentrollpaper': sentrollpaper,
-            'user_info': user_info
+            'realname' : realname
         }
         return render(request, 'roll_paper/sentletter.html', context)
     return render(request, 'roll_paper/error.html')

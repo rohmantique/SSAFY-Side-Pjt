@@ -19,8 +19,10 @@
     <h2>내가 쓴 편지 📝</h2>
   </header>
 
-  {% for rollpaper in sentrollpaper %}
-    <a href="{% url 'rollpaper:update' user.pk rollpaper.user.realname %}" class="btn userName m-1">{{ rollpaper.user.realname }}</a>
-  {% endfor %}
+  {% for name in realname %}
+  <a href="{% url 'rollpaper:update' user.pk name %}" class="btn userName m-1">
+    {{ name }}
+  </a>
+{% endfor %}
 
 {% endblock content %}
