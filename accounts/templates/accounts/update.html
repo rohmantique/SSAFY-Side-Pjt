@@ -3,24 +3,28 @@
 {% block content %}
   <header class="m-5">
     <h2>회원정보 수정</h2>
-  </header>
+  </header> 
+
 
   <div class="accounts-container">
+    
+    <div style="text-align: right;">
+      <a style="text-decoration: none;" href="{% url 'accounts:change_password' %}">비밀번호 변경</a><br>
+      <a style="text-decoration: none;" href="{% url 'accounts:user_delete' %}">회원 탈퇴</a>
+    </div>
+    <hr>
+
     <form action="" method = 'POST'>
       {% csrf_token %}
       {{form1.as_p}}
       {{password_form.as_p}}
-      <div class="d-flex justify-content-between">
-        <a href="{% url 'rollpaper:main' %}" class="btn mybtn">뒤로가기</a>
-        <button class="btn mybtn">수정 완료</button>
+      <div class="d-flex justify-content-between mt-4">
+        <a href="{% url 'rollpaper:main' %}" class="btn accountbtn">뒤로가기</a>
+        <button class="btn accountbtn">수정 완료</button>
       </div>
-    </form>
-      
+    </form> 
     <hr>
-    <div>
-      <a href="{% url 'accounts:change_password' %}" class="btn mybtn">비밀번호 변경</a>
-      <a href="{% url 'accounts:user_delete' %}" class="btn dangerbtn">회원 탈퇴</a>
-    </div>
+    
   </div>
 
 {% endblock content %}
