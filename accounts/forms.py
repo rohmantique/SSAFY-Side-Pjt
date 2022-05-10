@@ -98,7 +98,7 @@ class CustomAuthenticationForm(AuthenticationForm):
     )
 
 class CustomPasswordChangeForm(PasswordChangeForm):
-    password1=forms.CharField(
+    old_password=forms.CharField(
         label='기존 비밀번호',
         strip=False,
         widget=forms.PasswordInput(
@@ -109,7 +109,7 @@ class CustomPasswordChangeForm(PasswordChangeForm):
         )
     
     )
-    newpassword1 = forms.CharField(
+    new_password1 = forms.CharField(
         label='새 비밀번호',
         widget=forms.PasswordInput(
             attrs={
@@ -117,7 +117,7 @@ class CustomPasswordChangeForm(PasswordChangeForm):
             }
         )
     )
-    newpassword2 = forms.CharField(
+    new_password2 = forms.CharField(
         label='새 비밀번호 (확인)',
         widget=forms.PasswordInput(
             attrs={
@@ -129,7 +129,7 @@ class CustomPasswordChangeForm(PasswordChangeForm):
 
     class Meta:
         model = User
-        fields = ('password1', 'newpassword1', 'newpassword2',)
+        fields = ('old_password', 'new_password1', 'new_password2',)
 
     
 

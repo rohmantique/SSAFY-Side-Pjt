@@ -10,10 +10,14 @@ class RollPaper(models.Model):
 
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL,
-        on_delete=models.CASCADE, related_name='receiver'
+        on_delete=models.SET_NULL,
+        null=True,
+        related_name='receiver'
     )
 
     user2 = models.ForeignKey(
         settings.AUTH_USER_MODEL,
-        on_delete=models.CASCADE, related_name='sender'
+        on_delete=models.SET_NULL,
+        null=True,
+        related_name='sender'
     )
