@@ -17,8 +17,10 @@
     </form>
       
     <hr>
-    <a href="{% url 'accounts:change_password' %}" class="btn mybtn">비밀번호 변경</a>
-    <a href="{% url 'accounts:user_delete' %}" class="btn mybtn">회원 탈퇴</a>
+    <div>
+      <a href="{% url 'accounts:change_password' %}" class="btn mybtn">비밀번호 변경</a>
+      <a href="{% url 'accounts:user_delete' %}" class="btn dangerbtn">회원 탈퇴</a>
+    </div>
   </div>
 
 {% endblock content %}

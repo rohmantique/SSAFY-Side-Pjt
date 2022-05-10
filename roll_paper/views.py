@@ -102,7 +102,7 @@ def letterbox(request, user_pk):
 def detail(request, user_pk, rollpaper_pk):
     receiver = get_object_or_404(get_user_model(), pk=user_pk)
     rollpaper = get_object_or_404(RollPaper, pk=rollpaper_pk)
-
+    #탈퇴한 사용자인 경우 nickname이 없으니까 조건문으로 달아주기
     if rollpaper.user == receiver:
         context = {
             'rollpaper': rollpaper,
