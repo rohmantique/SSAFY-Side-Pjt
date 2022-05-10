@@ -9,9 +9,9 @@
     <form action="" method='POST'>
       {% csrf_token %}
       {{ form.as_p }}
-      <button class="btn mybtn" style="float: right;">로그인</button>
+      <button class="btn accountbtn" style="float: right;">로그인</button>
     </form>
-    <a href="{% url 'rollpaper:index' %}" class="btn mybtn">뒤로가기</a>
+    <a href="{% url 'rollpaper:index' %}" class="btn accountbtn">뒤로가기</a>
   </div>
 {% endblock content %}
 
