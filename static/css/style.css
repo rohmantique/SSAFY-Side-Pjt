@@ -64,7 +64,7 @@ input {
 }
 
 .btn {
-  font-size: 1.5rem !important;
+  font-size: 1.3rem !important;
 }
 
 .mybtn {
@@ -72,20 +72,9 @@ input {
   color: #555CF1 !important;
 }
 
-.accountbtn {
-  background-color: #FFC90E !important;
-  color: #555CF1 !important;
-  font-size: 1.3rem !important;
-}
-
 .dangerbtn {
   background-color: #d52d3e !important;
   color: beige !important;
-}
-.accountdangerbtn {
-  background-color: #d52d3e !important;
-  color: beige !important;
-  font-size: 1.3rem !important;
 }
 
 .userName:hover {
@@ -121,5 +110,4 @@ input {
 
 li {
   list-style-type: '📌 ';
-  margin-left: 2.2rem;
 }

@@ -1,19 +1,6 @@
 {% extends 'base.html' %}
 
 {% block content %}
-  {% comment %} <ul class="messages list-unstyled">
-    {% for message in messages %}
-    <li
-      {% if message.tags == 'info' %} 
-        class="alert alert-info"
-
-      {% endif %}
-    >
-      <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Info:"><use xlink:href="#info-fill"/></svg>
-      {{ message }}
-    </li>
-    {% endfor %}
-  </ul> {% endcomment %}
 
   {% if empty %}
     <header class="m-5">
