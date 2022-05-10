@@ -1,6 +1,15 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<style>
+  .aboutus1 {
+    height: 18rem;
+
+  }
+  .aboutus2 {
+    height: 20rem;
+  }
+</style>
   <header class="m-5">
     <h2>서비스 소개</h2>
   </header>
@@ -15,5 +24,24 @@
     <br>
     <br>
     <h3>저희 팀, <span class="fw-bold">뚱땅즈</span>를 소개합니다!</h3>
+    <br>
+    <div class="mt-4">
+
+      <div class="d-flex m-4">
+        <img class="aboutus1" src="/static/images/aboutus_eunho.jpeg" alt="eunho">
+        <p>은호: 디자인과 기획, 프론트를 맡은 은호입니다! 서울 1반 추억쌓피의 페이지의 모든 그림과 이모지를 담당했어요. 사용자의 관점에서 가장 최적의 UI를 만들기 위해 고민했습니다.🙌   </p>
+      </div>
+
+      <div class="d-flex m-4">
+        <p>희진: 기획과 프론트엔드, 백엔드를 맡은 희진입니다. 우리의 서비스를 사용자가 어떤 마음으로 이용했으면 좋겠는지 고민한 다음, 열심히 모델링하고 오류의 빈틈을 막기 위해 노력했어요.🤘 </p>
+        <img class="aboutus2" src="/static/images/aboutus_heejin.png" alt="heejin">
+      </div>
+
+      <div class="d-flex m-4">
+        <img class="aboutus2" src="/static/images/aboutus_suyeon.png" alt="suyeon">
+        <p>수연: 기획 그리고 백엔드를 맡은 수연입니다. 은호와 함께 이모지 및 그림을 완성하고, 백엔드 로직에 빈틈이 없도록, 데이터 흐름이 원활하도록 코드를 짰습니다.✌</p>
+      </div>
+    </div>
+
   </main>
 {% endblock content %}
