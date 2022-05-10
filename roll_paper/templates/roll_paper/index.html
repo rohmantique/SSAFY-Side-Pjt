@@ -1,23 +1,27 @@
 {% extends 'base.html' %}
 
 {% block style %}
-@media(max-width: 767px) {
-  .bg-img {
-      background-image: url('../../static/images/index.PNG');
+  @media(max-width: 767px) {
+    .bg-img {
+        background-image: url('../../static/images/index.PNG');
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center;
+      }
+  }  
+
+  @media(min-width: 768px) {
+    .bg-img {
+      background-image: url('../../static/images/index_pc.PNG');
       background-size: contain;
       background-repeat: no-repeat;
       background-position: center;
     }
-}  
-
-@media(min-width: 768px) {
-  .bg-img {
-    background-image: url('../../static/images/index_pc.PNG');
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
   }
-}
+
+  .btn {
+    font-size: 1.5rem !important;
+  }
 {% endblock style %}
 
 {% block content %}
