@@ -13,8 +13,6 @@
   <link rel="shortcut icon" href="{% static 'favicon.ico' %}"/>
   <title>추억쌓피</title>
   <style>
-    {% block style %}
-    {% endblock %}
     .navitem {
       color: white;
       text-decoration: none;
@@ -40,6 +38,8 @@
       font-weight: bold !important;
       color: white !important;
     }
+    {% block style %}
+    {% endblock %}
   </style>
 </head>
 <body>
