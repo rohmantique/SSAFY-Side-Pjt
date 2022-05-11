@@ -31,7 +31,7 @@
     const navbar = document.querySelector('nav#navbar')
     navbar.setAttribute('class', 'd-none')
   
-    <!-- realname input에 영어만 입력받게 js 설정 -->
+    {% comment %} realname input에 영어만 입력받게 js 설정 {% endcomment %}
     const realname = document.querySelector('input#realname')
     const onlyKorean = function() {
       const pattern = /[a-z0-9]|[ \[\]{}()<>?|`~!@#$%^&*-_+=,.;:\"'\\]/g
@@ -39,10 +39,10 @@
     }
     realname.addEventListener('keyup', onlyKorean)
  
-    <!-- username input에 영어만 입력받게 js 설정 -->
+    {% comment %} username input에 영어만 입력받게 js 설정 {% endcomment %}
     const username = document.querySelector('input#username')
     const onlyEnglish = function() {
-      const pattern2 = /[ㄱ-ㅎㅏ-ㅣ가-힣]|[ \[\]{}()<>?|`~!@#$%^&*-_+=,.;:\"'\\]/g
+      const pattern2 = /[ㄱ-ㅎㅏ-ㅣ가-힣]/g
       this.value = this.value.replace(pattern2, '')
     }
     username.addEventListener('keyup', onlyEnglish)
