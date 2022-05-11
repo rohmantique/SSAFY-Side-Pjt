@@ -146,7 +146,8 @@ def sentletter(request, user_pk):
         sentrollpaper = RollPaper.objects.filter(user2=request.user)
         realname = []
         for rollpaper in sentrollpaper:
-            realname.append(rollpaper.user.realname)
+            if rollpaper.user:
+                realname.append(rollpaper.user.realname)
         realname.sort()
         context = {
             'realname' : realname
