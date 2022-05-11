@@ -38,11 +38,15 @@ a {
 }
 
 @media screen and (max-width : 768px){ 
-  html {font-size:16px}
+  html {font-size:16px;}
 }
 
 @media screen and (max-width : 425px){ 
-  html {font-size: 13px}
+  html {font-size: 13px;}
+
+  .accounts-container {
+    width: 19rem !important;
+  }
 }
 
 .btn:focus, .btn:active, .form-control:focus, .form-control:active .navbar-toggler:focus, .navbar-toggler:focus {
