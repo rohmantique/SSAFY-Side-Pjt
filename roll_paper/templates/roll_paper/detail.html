@@ -6,10 +6,6 @@
     max-width: 800px;
   }
 
-  .letter-footer {
-    margin-left: 0 auto;
-  }
-
   @media screen and (min-width : 992px){ 
     .letter-body {
       max-width: 500px;
@@ -22,15 +18,18 @@
     <h2>{{ from }}에게 온 편지</h2>
   </header>
 
-  <main class="ps-5 me-4">
-    <div class="letter-header d-flex justify-content-center">
+  <main class="text-center">
+    <div class="letter-header my-4">
       <h3>{{ rollpaper.title }}</h3>
     </div>
     <div class="letter-body" style="width:80%; margin:0 auto;">
       <p>{{ rollpaper.content }}</p>
     </div>
-    <div class="letter-footer mt-2" style="float:right;">
+    <div class="letter-footer">
       <img src="/static/images/letters.PNG" alt="Letter Image">
+      <div>
+        <a href="{% url 'rollpaper:letterbox' request.user.pk %}" class="btn userName text-decoration-underline mb-5 mt-3" style="float:center;">뒤로</a>
+      </div>
     </div>
   </main>
 

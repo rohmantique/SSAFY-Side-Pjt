@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 {% load static %}
 
-<html lang="en">
+<html lang="en" class="h-100">
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -42,8 +42,7 @@
     {% endblock %}
   </style>
 </head>
-<body>
-
+<body class="d-flex flex-column h-100">
   <nav id="navbar" class="navbar navbar-expand-md navbar-light myClass p-1">
     <div class="container-fluid">
       <a href="{% url 'rollpaper:main' %}" class="navbar-brand px-2 fw-bold" style="color: #FFC90E;">
@@ -83,6 +82,10 @@
     {% endblock content %}
   </div>
 
+  <footer class="footer mt-auto py-3 text-center">
+    <small>© DDOONGDDANG's 2022</small>
+  </footer>
+
   <!-- Signup Modal (accounts/signup.html) -->
   <div class="modal fade" id="signupModal" tabindex="-1" aria-labelledby="signupModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -103,9 +106,12 @@
     </div>
   </div>  
 
+  
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
   
   {% block script %}
   {% endblock script %}
 </body>
+
+
 </html>
