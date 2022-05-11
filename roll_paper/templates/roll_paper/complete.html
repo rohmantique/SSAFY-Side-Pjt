@@ -2,7 +2,7 @@
 
 {% block content %}
 <header class="m-5">
-  <h2 >편지를 성공적으로 보냈어요!</h2>
+  <h2 >편지를 성공적으로 <span id="line" class="d-none"><br></span>보냈어요!</h2>
 </header>
 <div class="container d-flex justify-content-center">
   <a href="{% url 'rollpaper:userlst' %}" class="text-decoration-none userName">
@@ -11,3 +11,15 @@
 </div>
 {% endblock content %}
 
+{% block script %}
+<script>
+  {% comment %} 모바일에서 header breakpoint 지정 {% endcomment %}
+  const line = document.querySelector('#line')
+  const mql = window.matchMedia("screen and (max-width: 390px)")
+  if (mql.matches) { 
+    line.setAttribute('class', '')
+  } else { 
+    line.setAttribute('class', 'd-none')
+  }
+</script>
+{% endblock script %}
