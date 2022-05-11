@@ -1,34 +1,46 @@
 {% extends 'base.html' %}
 
 {% block style %}
-@media(max-width: 991px) {
-  .container {
-      background-image: url('../../static/images/main.PNG');
+  @media(min-width: 992px) {
+    .container {
+      background-image: url('../../static/images/main_pc.PNG');
       background-size: contain;
       background-repeat: no-repeat;
       background-position: top;
     }
-}  
 
-@media(min-width: 992px) {
-  .container {
-    background-image: url('../../static/images/main_pc.PNG');
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: top;
+    .mobile {
+      display: none;
+    }
   }
 
-  .mobile {
-    display: none;
+  @media(max-width: 992px) and (min-width: 474px){
+    .container {
+        background-image: url('../../static/images/main.PNG');
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: top;
+      }
   }
-}
+  
+  @media(max-width: 474px){
+    .container {
+      background-image: url('../../static/images/main2.PNG');
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: top;
+    }
 
+    .mobile {
+      display: none;
+    }
+  }
 {% endblock style %}
 
 {% block content %}
   <header class="m-5 text-center">
-    <h2>1학기 동안 다들</h2>
-    <h2>정말 수고 많으셨습니다!</h2>
+    <h2>1학기 동안 <span id="line1" class="d-none"><br></span>다들</h2>
+    <h2>정말 수고 <span id="line2" class="d-none"><br></span>많으셨습니다!</h2>
   </header>
 
   <main class="my-5 mx-2">
@@ -36,7 +48,21 @@
     <div class="my-5 p-5"></div>
     <div class="my-5 p-5"></div>
     <div class="my-5 p-5 mobile"></div>
-    <div class="my-5 p-5 mobile"></div>
-    <div class="my-5 p-5 mobile"></div>
   </main>
 {% endblock content %}
+
+{% block script %}
+<script>
+  {% comment %} 모바일에서 header breakpoint 지정 {% endcomment %}
+  const line1 = document.querySelector('#line1')
+  const line2 = document.querySelector('#line2')
+  const mql = window.matchMedia("screen and (max-width: 473px)")
+  if (mql.matches) { 
+    line1.setAttribute('class', '')
+    line2.setAttribute('class', '')
+  } else { 
+    line.setAttribute('class', 'd-none')
+    line2.setAttribute('class', 'd-none')
+  }
+</script>
+{% endblock script %}
