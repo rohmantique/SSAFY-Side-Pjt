@@ -30,6 +30,7 @@ def aboutus(request):
 @require_GET
 def userlst(request):
     user_lst = User.objects.all().order_by('realname')
+    currentuser = len(user_lst) - 1
     excepted = []
 
     for user in user_lst[:]:
@@ -44,7 +45,8 @@ def userlst(request):
     context = {
         'user_lst': user_lst,
         'excepted' : excepted,
-        'empty' : empty
+        'empty' : empty,
+        'currentuser' : currentuser,
     }
     return render(request, 'roll_paper/user_lst.html', context)
 
