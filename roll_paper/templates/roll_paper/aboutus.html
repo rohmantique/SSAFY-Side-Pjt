@@ -1,39 +1,67 @@
 {% extends 'base.html' %}
 
 {% block style %}
-  @media screen and (max-width : 456px){
-    html {font-size:10px}
-    
-    .bubble {
-      height: 260px !important;
-    }
-
-    .mbubble {
-      height: 235px !important;
-    }
-
-    .bubble2 {
-      height: 240px !important;
-    }
+  .aboutus1 {
+    width: 25%;
+    height: 25%;
   }
 
-  @media screen and (max-width : 576px){ 
-    html {font-size:16px}
-    
-    .bubble {
-      font-size: 1.1rem;
-      padding: 1.1rem 1.1rem 0 !important;
-      height: 220px;
-    }
+  .aboutus2 {
+    width: 25%;
+    height: 25%;
+  }
 
-    .bubble2 {
-      font-size: 1.1rem;
-      padding: 1.1rem 1.1rem 0 !important;
+  .bubble {
+    background-image: url('../../static/images/chatbubble.PNG');
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-position: top;
+    padding: 3rem 3rem 0;
+    height: 300px;
+  }
+
+  .bubble2 {
+    background-image: url('../../static/images/chatbubble2.PNG');
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-position: top;
+    padding: 3rem 3rem 0;
+    height: 300px;
+  }
+  
+  .whisper {
+    font-size: 1.05rem;
+  }
+
+  @media screen and (max-width : 1200px) and (min-width : 992px){ 
+    .bubble {
+      font-size: 1.3rem;
+      padding: 1.2rem 2.5rem 0 !important;
       height: 200px;
     }
 
+    .bubble2 {
+      font-size: 1.3rem;
+      padding: 1.2rem 2.5rem 0 !important;
+      height: 200px;
+    }
+  }
+
+  @media screen and (max-width : 992px) and (min-width : 768px){ 
+    .bubble {
+      font-size: 1.1rem;
+      padding: 1rem 2rem 0 !important;
+      height: 190px;
+    }
+
+    .bubble2 {
+      font-size: 1.1rem;
+      padding: 1rem 2rem 0 !important;
+      height: 190px;
+    }
+
     .whisper {
-      font-size: 0.85rem !important;
+      font-size: 0.9rem !important;
     }
   }
 
@@ -51,75 +79,90 @@
     }
 
     .whisper {
-      font-size: 0.8rem !important;
-    }
-  }
-
-  @media screen and (max-width : 992px) and (min-width : 768px){ 
-    .bubble {
-      font-size: 1.1rem;
-      padding: 1rem 2rem 0 !important;
-      height: 190px;
-    }
-
-    .bubble2 {
-      font-size: 1.1rem;
-      padding: 1rem 2rem 0 !important;
-    }
-
-    .whisper {
       font-size: 0.9rem !important;
     }
   }
 
-  @media screen and (max-width : 1200px) and (min-width : 992px){ 
+  @media screen and (max-width : 576px){
     .bubble {
-      font-size: 1.3rem;
-      padding: 1.2rem 2.5rem 0 !important;
-      height: 200px;
+      background-image: url('../../static/images/chatbubble_mobile.jpg');
     }
 
     .bubble2 {
-      font-size: 1.3rem;
-      padding: 1.2rem 2.5rem 0 !important;
-      height: 200px;
+      background-image: url('../../static/images/chatbubble_mobile2.jpg');
+    }
+
+    .aboutus1 {
+      width: 10rem;
+      height: 10rem;
+    }
+
+    .aboutus2 {
+      width: 10rem;
+      height: 10rem;
     }
   }
 
-  .aboutus1 {
-    width: 25%;
-    height: 25%;
+  @media screen and (max-width : 576px) and (min-width : 425px){ 
+    .bubble {
+      font-size: 1.35rem;
+      padding: 1.3rem 1.45rem 0 !important;
+      height: 260px;
+    }
+
+    .mbubble {
+      height: 250px;
+    }
+
+    .bubble2 {
+      font-size: 1.35rem;
+      padding: 1.3rem 1.25rem 0 !important;
+      height: 230px;
+    }
+
+    .whisper {
+      font-size: 1rem !important;
+    }
   }
 
-  .aboutus2 {
-    width: 25%;
-    height: 25%;
+  @media screen and (max-width : 425px) and (min-width : 314px){
+    .bubble {
+      padding: 1.6rem 1.5rem 0 !important;
+      height: 260px;
+    }
+
+    .mbubble {
+      height: 250px;
+    }
+
+    .bubble2 {
+      padding: 1.6rem 1.5rem 0 !important;
+      height: 250px;
+    }
+
+    .whisper {
+      font-size: 1.1rem;
+    }
   }
 
-  .bubble {
-    background-image: url('../../static/images/chatbubble.PNG');
-    background-size: 100% 100%;
-    background-repeat: no-repeat;
-    background-position: top;
-    width: 75%;
-    padding: 3rem 3rem 0;
-  }
+  @media screen and (max-width : 314px){
+    .bubble {
+      padding: 1.5rem 1.3rem 0 !important;
+      height: 310px;
+    }
 
-  .bubble2 {
-    background-image: url('../../static/images/chatbubble2.PNG');
-    background-size: 100% 100%;
-    background-repeat: no-repeat;
-    background-position: top;
-    width: 75%;
-    padding: 3rem 3rem 0;
-  }
-  
-  .whisper {
-    font-size: 1.05rem;
-  }
+    .mbubble {
+      height: 290px;
+    }
 
-  p {
-    margin: 0px;
+    .bubble2 {
+      padding: 1.6rem 1.25rem 0 !important;
+      height: 290px;
+    }
+
+    .whisper {
+      font-size: 1.1rem;
+    }
   }
 {% endblock style %}
 
@@ -129,31 +172,37 @@
   </header>
 
   <main>
-    <h3><span class="fw-bold">서울 1반 추억쌓피💌</span>는...</h3>
-    <p>5개월 간 비대면으로 동고동락한 반 동료에게 그간 하지 못했던 말을 전하는 서비스입니다. </p>
-    <p><strong>'비대면과 디지털 시대에는 어떻게 마음을 전하면 좋을까?'</strong> 라는 고민과 함께 시작됐지요.</p>
-    <p><strong>SSAFY</strong>는 단순히 '실력있는 개발자가 되기 위한 곳'이 아니라 <strong>'소통을 잘하는 개발자'</strong> & <strong>'든든한 소속감을 통해 책임감 있는 개발자'</strong>로 성장할 수 있는 곳이었습니다.</p>
-    <p>대면 수업이었다면 더욱 원활한 교류가 이루어졌겠지만, <strong>서울 1반 추억쌓피</strong>를 통해 아쉬운 마음을 달래볼까요?</p>
-    <p>한 학기동안 정말 고생 많으셨고, 어디에서든 <strong>소통왕👍</strong> <strong>책임왕👍</strong> 수식어가 붙는 여러분이 되길 기원하고🙏 기대할게요🥰</p>
-    <br>
-    <br>
-    <h3>저희 팀, <span class="fw-bold">뚱땅즈</span>를 소개합니다!</h3>
-    <br>
-    <div class="mt-4">
+    <div class="my-5">
+      <h3 class="my-2"><span class="fw-bold">서울 1반 추억쌓피💌</span>는...</h3>
+      <div>
+        <p>5개월 간 비대면으로 동고동락한 반 동료에게 그간 하지 못했던 말을 전하는 서비스입니다. </p>
+        <p><strong>'비대면과 디지털 시대에는 어떻게 마음을 전하면 좋을까?'</strong> 라는 고민과 함께 시작됐지요.</p>
+        <p><strong>SSAFY</strong>는 단순히 '실력있는 개발자가 되기 위한 곳'이 아니라 <strong>'소통을 잘하는 개발자'</strong> & <strong>'든든한 소속감을 통해 책임감 있는 개발자'</strong>로 성장할 수 있는 곳이었습니다.</p>
+        <p>대면 수업이었다면 더욱 원활한 교류가 이루어졌겠지만, <strong>서울 1반 추억쌓피</strong>를 통해 아쉬운 마음을 달래볼까요?</p>
+        <p>한 학기동안 정말 고생 많으셨고, 어디에서든 <strong>소통왕👍</strong> <strong>책임왕👍</strong> 수식어가 붙는 여러분이 되길 기원하고🙏 기대할게요🥰</p>
+      </div>
+    </div>
 
-      <div class="d-flex m-4">
-        <img class="aboutus1" src="/static/images/aboutus_eunho.jpeg" alt="eunho">
-        <p class="bubble mbubble">디자인과 기획, 프론트를 맡은 <strong>은호</strong>에요! 서울1반 추억쌓피의 모든 그림과 이모지를 담당했어요 <span class="whisper">파비콘 귀엽죠? (속닥)</span> 사용자의 관점에서 최적의 UI를 만들기 위해 고민했습니다.🙌 1반과 어울리는 장난스럽지만 따뜻한 컨셉 마음에 드시나요?</p>
+    <div class="my-4">
+      <h3>저희 팀, <span class="fw-bold">뚱땅즈</span>를 소개합니다!</h3>
+
+      <div class="mt-4">
+        <div class="row d-flex align-items-end m-4">
+          <img class="order-last order-sm-first aboutus1" src="/static/images/aboutus_eunho.jpeg" alt="eunho">
+          <p class="col-12 col-sm-9 bubble mbubble">디자인과 기획, 프론트를 맡은 <strong>은호</strong>입니다! 서울1반 추억쌓피의 그림과 반응형 구현을 담당했어요 <span class="whisper">파비콘 귀엽죠? (속닥)</span> 사용자의 관점에서 최적의 UI를 만들기 위해 고민했습니다.🙌 1반과 어울리는 장난스럽지만 따뜻한 컨셉 마음에 드시나요?</p>
+        </div>
+  
+        <div class="row d-flex align-items-end m-4">
+          <p class="col-12 col-sm-9 bubble2">기획과 프론트엔드, 백엔드를 맡은 <strong>희진</strong>입니다. 우리의 서비스를 사용자가 어떤 마음으로 이용했으면 좋겠는지 고민한 다음, 열심히 모델링하고 오류의 빈틈을 막기 위해 노력했어요.🤘 피드백은 언제나 환영입니다! <span class="whisper">얼른 친구들한테 뿌리세요-</span></p>
+          <img class="offset-8 offset-sm-0 aboutus2" src="/static/images/aboutus_heejin.png" alt="heejin">
+        </div>
+  
+        <div class="row d-flex align-items-end m-4">
+          <img class="order-last order-sm-first aboutus2" src="/static/images/aboutus_suyeon.png" alt="suyeon">
+          <p class="col-12 col-sm-9 bubble">기획 그리고 백엔드를 맡은 <strong>수연</strong>입니다. 은호와 함께 이모지 및 그림을 완성하고, 백엔드 로직에 빈틈이 없도록, 데이터 흐름이 원활하도록 코드를 짰습니다.✌ 첫 프로젝트라 서툰 부분이 많지만 예쁘게 봐주셨으면 좋겠어요🥺 서울 1반 모든 분들 항상 응원합니다🌸</p>
+        </div>
       </div>
 
-      <div class="d-flex m-4">
-        <p class="bubble2">기획과 프론트엔드, 백엔드를 맡은 <strong>희진</strong>입니다. 우리의 서비스를 사용자가 어떤 마음으로 이용했으면 좋겠는지 고민한 다음, 열심히 모델링하고 오류의 빈틈을 막기 위해 노력했어요.🤘 피드백은 언제나 환영입니다! <span class="whisper">얼른 친구들한테 뿌리세요-</span></p>
-        <img class="aboutus2" src="/static/images/aboutus_heejin.png" alt="heejin">
-      </div>
-
-      <div class="d-flex m-4">
-        <img class="aboutus2" src="/static/images/aboutus_suyeon.png" alt="suyeon">
-        <p class="bubble">기획 그리고 백엔드를 맡은 <strong>수연</strong>입니다. 은호와 함께 이모지 및 그림을 완성하고, 백엔드 로직에 빈틈이 없도록, 데이터 흐름이 원활하도록 코드를 짰습니다.✌ 첫 프로젝트라 서툰 부분이 많지만 예쁘게 봐주셨으면 좋겠어요🥺 서울 1반 모든 분들 항상 응원합니다🌸</p>
       </div>
     </div>
 
