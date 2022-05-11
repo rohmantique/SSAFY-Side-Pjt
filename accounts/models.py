@@ -16,7 +16,7 @@ class User(AbstractUser):
             'unique': "이미 존재하는 닉네임입니다.",
         }
     )
-
+    # 오류메시지 username -> '아이디'로 수정
     username = models.CharField(
         ('username'),
         max_length=10,

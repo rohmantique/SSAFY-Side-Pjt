@@ -86,7 +86,8 @@ class CustomAuthenticationForm(AuthenticationForm):
                 'autofocus': True,
                 'class': 'form-control',
                 'id': 'username',
-                }),
+                },
+                ),
     )
     password = forms.CharField(
         label="비밀번호",
@@ -96,6 +97,14 @@ class CustomAuthenticationForm(AuthenticationForm):
                 'autocomplete': 'current-password',
                 'class': 'form-control'}),
     )
+    # 오류메시지 커스터마이징
+    error_messages = {
+                'invalid_login': (
+                # "Please enter a correct %(username)s and password. Note that both "
+                "올바른 아이디와 비밀번호를 입력해주세요. 두 필드 모두 대문자와 소문자를 구분합니다."
+                ),
+                'inactive': ("This account is inactive."),
+                }
 
 class CustomPasswordChangeForm(PasswordChangeForm):
     old_password=forms.CharField(
