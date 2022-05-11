@@ -7,7 +7,7 @@
 
   <!-- Button trigger modal -->
   <div class="d-flex justify-content-center mt-4">
-    <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#signupModal">
+    <button type="button" class="btn userName" data-bs-toggle="modal" data-bs-target="#signupModal">
       <i class="bi bi-exclamation-octagon-fill text-danger fs-3" width="20" height="20"></i> <span class="align-text-bottom fs-3">잠깐!</span>
     </button>
   </div>
@@ -31,7 +31,7 @@
     const navbar = document.querySelector('nav#navbar')
     navbar.setAttribute('class', 'd-none')
   
-    {% comment %} realname input에 영어만 입력받게 js 설정 {% endcomment %}
+    {% comment %} realname input에 한글만 입력받게 js 설정 {% endcomment %}
     const realname = document.querySelector('input#realname')
     const onlyKorean = function() {
       const pattern = /[a-z0-9]|[ \[\]{}()<>?|`~!@#$%^&*-_+=,.;:\"'\\]/g

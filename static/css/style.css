@@ -42,7 +42,7 @@ a {
 }
 
 @media screen and (max-width : 425px){ 
-  html {font-size: 10px}
+  html {font-size: 13px}
 }
 
 .btn:focus, .btn:active, .form-control:focus, .form-control:active .navbar-toggler:focus, .navbar-toggler:focus {
