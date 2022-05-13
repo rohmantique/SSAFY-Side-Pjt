@@ -92,7 +92,7 @@ def letterbox(request, user_pk):
 
     if receiver == request.user:
         now = datetime.now()
-        dday = datetime(2022,5,27)
+        dday = datetime(2022,5,26)
         if now > dday:
             user_info = request.user
             my_rollpaper = RollPaper.objects.filter(user=request.user)
