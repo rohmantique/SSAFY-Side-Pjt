@@ -104,10 +104,10 @@ def letterbox(request, user_pk):
                 'realname': user_info.realname[1:],
             }
             return render(request, 'roll_paper/letterbox.html', context)
-        # else:
-        #     return render(request, 'roll_paper/error.html')
+        else:
+            return render(request, 'roll_paper/notification.html')
 
-    return render(request, 'roll_paper/notification.html')
+    return render(request, 'roll_paper/error.html')
 
 
 @login_required
