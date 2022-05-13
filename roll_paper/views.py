@@ -8,7 +8,9 @@ from django.contrib.auth import get_user_model
 from roll_paper.models import RollPaper
 from accounts.models import User
 
-from .forms import RollPaperForm
+from .forms import RollPaperForm, wordCloudForm
+
+from datetime import datetime
 
 # Create your views here.
 @require_safe
@@ -57,13 +59,15 @@ def write(request, realname):
     receiver = get_object_or_404(get_user_model(), realname=realname)
    
     if request.method == 'POST':
-        form = RollPaperForm(request.POST)
-        if form.is_valid():
-            rollpaper = form.save(commit=False)
+        paperform = RollPaperForm(request.POST)
+        # cloudform = wordCloudForm(request.POST)
+        if paperform.is_valid():
+            rollpaper = paperform.save(commit=False)
             rollpaper.nickname = request.user.nickname
             rollpaper.user = receiver
             rollpaper.user2 = request.user
             rollpaper.save()
+
 
             return redirect('rollpaper:complete')
 
@@ -87,16 +91,22 @@ def letterbox(request, user_pk):
     receiver = get_object_or_404(get_user_model(), pk=user_pk)
 
     if receiver == request.user:
-        user_info = request.user
-        my_rollpaper = RollPaper.objects.filter(user=request.user)
-        number = len(my_rollpaper)
-        context = {
-            'my_rollpaper': my_rollpaper,
-            'user_info': user_info,
-            'number':number,
-            'realname': user_info.realname[1:],
-        }
-        return render(request, 'roll_paper/letterbox.html', context)
+        now = datetime.now()
+        dday = datetime(2022,5,27)
+        if now > dday:
+            user_info = request.user
+            my_rollpaper = RollPaper.objects.filter(user=request.user)
+            number = len(my_rollpaper)
+            context = {
+                'my_rollpaper': my_rollpaper,
+                'user_info': user_info,
+                'number':number,
+                'realname': user_info.realname[1:],
+            }
+            return render(request, 'roll_paper/letterbox.html', context)
+        # else:
+        #     return render(request, 'roll_paper/error.html')
+
     return render(request, 'roll_paper/error.html')
 
 

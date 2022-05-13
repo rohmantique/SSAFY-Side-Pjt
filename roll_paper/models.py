@@ -31,3 +31,6 @@ class RollPaper(models.Model):
 # 수정중
 # class FixedLengthValidator(BaseValidator):
 #     message = "제목이 최대 35글자인지 확인해주세요."
+
+# class wordCloud(models.Model):
+#     content = models.CharField(max_length=10)

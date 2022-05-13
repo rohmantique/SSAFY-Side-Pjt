@@ -1,6 +1,6 @@
 # forms.py
 from django import forms
-from .models import RollPaper
+from .models import RollPaper, wordCloud
 
 class RollPaperForm(forms.ModelForm):
     title = forms.CharField(
@@ -24,3 +24,10 @@ class RollPaperForm(forms.ModelForm):
         model = RollPaper
         fields = ('title', 'content',)
 
+
+
+# class wordCloudForm(forms.ModelForm):
+
+#     class Meta:
+#         model = wordCloud
+#         fields = '__all__'
