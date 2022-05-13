@@ -68,17 +68,16 @@ def write(request, realname):
             rollpaper.user2 = request.user
             rollpaper.save()
 
-
             return redirect('rollpaper:complete')
 
     else:
         if request.user == receiver:
             return redirect('rollpaper:userlst')
 
-        form = RollPaperForm()
+        paperform = RollPaperForm()
 
     context = {
-        'form': form,
+        'paperform': paperform,
     }
     return render(request, 'roll_paper/write.html', context)
 
