@@ -1,6 +1,6 @@
 # forms.py
 from django import forms
-from .models import RollPaper, wordCloud
+from .models import RollPaper
 
 class RollPaperForm(forms.ModelForm):
     title = forms.CharField(
