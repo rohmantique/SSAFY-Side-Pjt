@@ -8,7 +8,7 @@ from django.contrib.auth import get_user_model
 from roll_paper.models import RollPaper
 from accounts.models import User
 
-from .forms import RollPaperForm, wordCloudForm
+from .forms import RollPaperForm
 
 from datetime import datetime
 
