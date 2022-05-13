@@ -87,11 +87,10 @@ def complete(request):
 @login_required
 @require_GET
 def letterbox(request, user_pk):
-    receiver = get_object_or_404(get_user_model(), pk=user_pk)
 
-    if receiver == request.user:
+    if request.user.pk == user_pk:
         now = datetime.now()
-        dday = datetime(2022,5,26)
+        dday = datetime(2022,5,14)
         if now > dday:
             user_info = request.user
             my_rollpaper = RollPaper.objects.filter(user=request.user)
@@ -112,10 +111,9 @@ def letterbox(request, user_pk):
 @login_required
 @require_GET
 def detail(request, user_pk, rollpaper_pk):
-    receiver = get_object_or_404(get_user_model(), pk=user_pk)
     rollpaper = get_object_or_404(RollPaper, pk=rollpaper_pk)
 
-    if rollpaper.user == receiver:
+    if rollpaper.user.pk == user_pk:
         context = {
             'rollpaper': rollpaper,
             'from' : rollpaper.nickname
@@ -128,24 +126,25 @@ def detail(request, user_pk, rollpaper_pk):
 @require_http_methods(['GET', 'POST'])
 def update(request, user_pk, realname):
     writer = get_object_or_404(get_user_model(), pk=user_pk)
-    if request.user == writer:
-        receiver = get_object_or_404(get_user_model(), realname=realname)
-        rollpaper = get_object_or_404(RollPaper, user = receiver, user2 = request.user)
+    if writer:
+        if request.user == writer:
+            receiver = get_object_or_404(get_user_model(), realname=realname)
+            rollpaper = get_object_or_404(RollPaper, user = receiver, user2 = request.user)
 
-        if request.method == 'POST':
-            form = RollPaperForm(request.POST, instance=rollpaper)
-            if form.is_valid():
-                rollpaper = form.save()
-                return redirect('rollpaper:sentletter', user_pk)
-        else:
-            form = RollPaperForm(instance=rollpaper)
+            if request.method == 'POST':
+                form = RollPaperForm(request.POST, instance=rollpaper)
+                if form.is_valid():
+                    rollpaper = form.save()
+                    return redirect('rollpaper:sentletter', user_pk)
+            else:
+                form = RollPaperForm(instance=rollpaper)
 
-        context = {
-            'form': form,
-            'realname' : realname
-        }
+            context = {
+                'form': form,
+                'realname' : realname
+            }
 
-        return render(request, 'roll_paper/update.html', context)
+            return render(request, 'roll_paper/update.html', context)
     return render(request, 'roll_paper/error.html')
 
 
