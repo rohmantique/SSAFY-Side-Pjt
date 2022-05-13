@@ -107,7 +107,7 @@ def letterbox(request, user_pk):
         # else:
         #     return render(request, 'roll_paper/error.html')
 
-    return render(request, 'roll_paper/error.html')
+    return render(request, 'roll_paper/notification.html')
 
 
 @login_required
