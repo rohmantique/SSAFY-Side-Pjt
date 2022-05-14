@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     'roll_paper',
     'accounts',
     'bootstrap5',
+    'rest_framework',
     'django_extensions',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -109,7 +110,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'ko-kr'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Seoul'
 
 USE_I18N = True
 
@@ -132,15 +133,19 @@ STATICFILES_DIRS = [
     BASE_DIR / 'static',
 ]
 
-# Django에서 email 보내기 설정 추가
-# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+# # Django에서 email 보내기 설정 추가
+# MAIL_HOST = 'smtp.gmail.com' 		            # 메일 호스트 서버
+# EMAIL_PORT = '587' 			                    # 서버 포트
+# EMAIL_HOST_USER = 'ddoongddangs@gmail.com' 	    # 우리가 사용할 Gmail
+# EMAIL_HOST_PASSWORD = 'ssafy1234!!'		        # 우리가 사용할 Gmail p
+# EMAIL_USE_TLS = True			                # TLS 보안 설정
+# DEFAULT_FROM_EMAIL = EMAIL_HOST_USER	        # 응답 메일 관련 설정
 
-# EMAIL_HOST = 'smtp.gmail.com'
-
-# EMAIL_USE_TLS =True
-
-# EMAIL_PORT = 587
-
-# EMAIL_HOST_USER = 'ddoongddangs@gmail.com'
-
-# EMAIL_HOST_PASSWORD = 'ssafy1234!!'
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'ddoongddangs@gmail.com' 	    # 우리가 사용할 Gmail
+EMAIL_HOST_PASSWORD = 'ssafy1234!!'	
+SERVER_EMAIL = 'ddoongddangs@gmail.com'
+DEFAULT_FROM_MAIL = 'ddoongddangs'
