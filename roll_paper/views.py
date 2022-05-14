@@ -11,6 +11,7 @@ from accounts.models import User
 from .forms import RollPaperForm
 
 from datetime import datetime
+from django.conf import settings
 
 # Create your views here.
 @require_safe
@@ -178,3 +179,21 @@ def delete(request, user_pk, realname):
     sentrollpaper.delete()
     messages.add_message(request, messages.ERROR, '편지가 성공적으로 삭제되었습니다! 감성의 추진력을 얻기 위함인가요?')
     return redirect('rollpaper:sentletter', user_pk)
+
+#개발자에게 의견보내기
+# def sendmail(request):
+#     if request.method == 'POST':
+#         sender = request.POST['sender']
+#         receiver = settings.EMAIL_HOST_USER
+#         subject = request.POST['sub']
+#         content = request.POST['content']
+#         mail = sendmail(subject, content, sender, receiver, fail_silently=False)
+
+#         if mail:
+#             messages.success(request, '메일이 발송되었습니다!')
+#             return redirect('rollpaper:aboutus')
+#         else:
+#             return HttpResponse('메일 발송에 실패했습니다!')
+#     else:
+#         return redirect('rollpaper:aboutus')
+

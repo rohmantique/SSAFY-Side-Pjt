@@ -213,7 +213,12 @@
   <footer class="my-5">
     <div class="my-5">
       <h3>Contact</h3>
-      <p>사이트에 불만이 있으신가요? 혹은 칭찬해주고 싶은 부분이 있나요? 저희의 서비스에 대한 피드백과 의견은 <strong>ddoongddangs@gmail.com</strong>으로 보내주세요. 언제나 귀기울이며 더 나은 서비스로 보답하겠습니다!</p>
+      <form action="" method="POST">
+        {% csrf_token %}
+      <p>사이트에 불만이 있으신가요? 혹은 칭찬해주고 싶은 부분이 있나요? <br>
+        저희의 서비스에 대한 피드백과 의견은 <button style="border: none; background: none;"><strong>ddoongddangs@gmail.com</strong></button>으로 보내주세요.
+        언제나 귀기울이며 더 나은 서비스로 보답하겠습니다!</p>
+      </form>
     </div>
   </footer>
   {% endblock content %}

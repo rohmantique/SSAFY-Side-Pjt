@@ -21,4 +21,8 @@ urlpatterns = [
     path('rollpaper/sentletter/<int:user_pk>/', views.sentletter, name='sentletter'),
     path('rollpaper/sentletter/<int:user_pk>/<str:realname>/', views.update, name='update'),
     path('rollpaper/sentletter/<int:user_pk>/<str:realname>/delete/', views.delete, name='delete'),
+
+    #개발자에게 의견 보내기
+    # path('sendmail/', views.sendmail, name='sendmail'),
+    
 ]
