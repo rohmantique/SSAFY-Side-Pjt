@@ -22,6 +22,15 @@ class CustomUserCreationForm(UserCreationForm):
             }
         )
     )
+    email = forms.EmailField(
+        label='이메일',
+        widget=forms.TextInput(
+            attrs={
+                'class': 'form-control',
+                'id': 'email',
+            }
+        )
+    )
     realname = forms.CharField(
         label='이름',
         widget=forms.TextInput(
@@ -59,7 +68,18 @@ class CustomUserCreationForm(UserCreationForm):
     )    
     class Meta:
         model = User
-        fields = ('username','realname','nickname','password1', 'password2')
+        fields = ('username','realname','email', 'nickname','password1', 'password2',)
+
+# class WebUserCreationForm(UserCreationForm):
+    
+#     def save(self, commit=True):
+#         user = super(WebUserCreationForm, self).save(commit=False)
+
+#         if commit:
+#             user.is_active = False
+#             user.save()
+
+#             current_site = get_current_site(self.request)
 
 
 class CustomUserChangeForm(UserChangeForm):
