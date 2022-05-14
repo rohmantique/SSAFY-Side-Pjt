@@ -23,7 +23,14 @@ from .forms import (
 )
 from roll_paper.models import RollPaper
 
+#이메일 관련 모듈
+# from django.core.mail import EmailMessage
+# from rest_framework import status
+# from rest_framework.response import Response
+# from rest_framework.views import APIView
+
 # Create your views here.
+
 @require_http_methods(['GET', 'POST'])
 def signup(request):
 
