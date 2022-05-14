@@ -90,8 +90,8 @@ def letterbox(request, user_pk):
 
     if request.user.pk == user_pk:
         now = datetime.now()
-        dday = datetime(2022,5,14)
-        if now > dday:
+        target_day = datetime(year=2022, month=5, day=26, hour=0, minute=0, second=0)
+        if now > target_day:
             user_info = request.user
             my_rollpaper = RollPaper.objects.filter(user=request.user)
             number = len(my_rollpaper)
@@ -103,7 +103,12 @@ def letterbox(request, user_pk):
             }
             return render(request, 'roll_paper/letterbox.html', context)
         else:
-            return render(request, 'roll_paper/notification.html')
+            d_day = target_day - now
+            context = {
+                'targetday': target_day,
+                'dday': d_day,
+            }
+            return render(request, 'roll_paper/notification.html', context)
 
     return render(request, 'roll_paper/error.html')
 
