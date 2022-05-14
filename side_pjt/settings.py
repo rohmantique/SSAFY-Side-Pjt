@@ -131,3 +131,16 @@ AUTH_USER_MODEL = 'accounts.User'
 STATICFILES_DIRS = [
     BASE_DIR / 'static',
 ]
+
+# Django에서 email 보내기 설정 추가
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+
+# EMAIL_HOST = 'smtp.gmail.com'
+
+# EMAIL_USE_TLS =True
+
+# EMAIL_PORT = 587
+
+# EMAIL_HOST_USER = 'ddoongddangs@gmail.com'
+
+# EMAIL_HOST_PASSWORD = 'ssafy1234!!'

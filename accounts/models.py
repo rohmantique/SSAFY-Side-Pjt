@@ -15,7 +15,7 @@ class User(AbstractUser):
     nickname = models.CharField(max_length=10, blank=False, unique=True,
         error_messages={
             'unique': "이미 존재하는 닉네임입니다.",
-            'max_length': '닉네임이 5글자 이내인지 확인해주세요.',
+            'max_length': '닉네임이 10글자 이내인지 확인해주세요.',
         }
     )
     # 오류메시지 username -> '아이디'로 수정
