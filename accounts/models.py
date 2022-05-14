@@ -28,3 +28,10 @@ class User(AbstractUser):
             'max_length': '아이디가 10글자 이내인지 확인해주세요.',
         },
     )
+    email = models.EmailField(
+        blank=False,
+        unique=True,
+        error_messages={
+            'unique': "이미 존재하는 이메일입니다.",
+        }
+    )
