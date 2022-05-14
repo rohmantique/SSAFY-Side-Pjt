@@ -17,25 +17,15 @@
     </header>
     <h4 class="mb-4">편지를 보내고 싶은 사람의 이름을 클릭하세요!</h4>
     
-
-    <div class="modal fade" id="userlstModal" tabindex="-1" aria-labelledby="userlstModalLabel" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h3 class="modal-title" id="userlstModalLabel">👌 걱정 마세요!</h3>
-          </div>
-          <div class="modal-body">
-            <p>현재 가입한 사용자는 <strong>{{ user.realname }}</strong>님을 제외하고 <strong>{{ currentuser }} </strong>명 입니다.</p>
-            <br>
-            <p>아직 가입하지 않은 회원이 있을 수 있으니</p>
-            <p><strong>5월 25일 23시 59분</strong>까지 계속 접속하며 확인해주실꺼죠?</p>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn mybtn" data-bs-dismiss="modal">당근이죠~🥕</button>
-          </div>
-        </div>
-      </div>
-    </div>  
+    <!-- Button trigger modal -->
+    <div class="d-flex justify-content-center mt-4">
+      <button type="button" class="btn userName" data-bs-toggle="modal" data-bs-target="#userlstModal">
+        <i class="bi bi-question-octagon-fill textBlue fs-3" width="20" height="20"></i>
+        <span class="align-text-bottom fs-3">
+          내가 찾는 사람이 없다구요?
+        </span>
+      </button>
+    </div>
   {% endif %}
 
   {% for user in user_lst %}
@@ -46,14 +36,23 @@
     {% endif %}
   {% endfor %}  
 
-  <!-- Button trigger modal -->
-  <div class="d-flex justify-content-center mt-4">
-    <button type="button" class="btn userName" data-bs-toggle="modal" data-bs-target="#userlstModal">
-      <i class="bi bi-question-octagon-fill textBlue fs-3" width="20" height="20"></i>
-      <span class="align-text-bottom fs-3">
-        내가 찾는 사람이 없다구요?
-      </span>
-    </button>
-  </div>
-
+  <!-- 내가 찾는 사람 Modal (rollpaper/user_lst.html) -->
+  <div class="modal fade" id="userlstModal" tabindex="-1" aria-labelledby="userlstModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3 class="modal-title" id="userlstModalLabel">👌 걱정 마세요!</h3>
+        </div>
+        <div class="modal-body">
+          <p>현재 가입한 사용자는 <strong>{{ user.realname }}</strong>님을 제외하고 <strong>{{ currentuser }} </strong>명 입니다.</p>
+          <br>
+          <p>아직 가입하지 않은 회원이 있을 수 있으니</p>
+          <p><strong>{{ targetday.month }}월 {{ targetday.day }}일 {{ targetday.hour }}시 {{ targetday.minute }}분</strong>까지 계속 접속하며 확인해 주실 거죠?</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn mybtn" data-bs-dismiss="modal">당근이쥬🥕</button>
+        </div>
+      </div>
+    </div>
+  </div> 
 {% endblock content %}
