@@ -36,6 +36,8 @@ def userlst(request):
     currentuser = len(user_lst) - 1
     excepted = []
 
+    target_day = datetime(year=2022, month=5, day=26, hour=23, minute=59, second=59)
+
     for user in user_lst[:]:
         person = RollPaper.objects.filter(user2=request.user, user=user)
         if person:
@@ -50,6 +52,7 @@ def userlst(request):
         'excepted' : excepted,
         'empty' : empty,
         'currentuser' : currentuser,
+        'targetday': target_day,
     }
     return render(request, 'roll_paper/user_lst.html', context)
 
@@ -91,7 +94,7 @@ def letterbox(request, user_pk):
 
     if request.user.pk == user_pk:
         now = datetime.now()
-        target_day = datetime(year=2022, month=5, day=26, hour=0, minute=0, second=0)
+        target_day = datetime(year=2022, month=5, day=27, hour=0, minute=0, second=0)
         if now > target_day:
             user_info = request.user
             my_rollpaper = RollPaper.objects.filter(user=request.user)
@@ -109,7 +112,7 @@ def letterbox(request, user_pk):
                 'targetday': target_day,
                 'dday': d_day,
             }
-            return render(request, 'roll_paper/notification.html', context)
+            return render(request, 'roll_paper/letterbox_disable.html', context)
 
     return render(request, 'roll_paper/error.html')
 
