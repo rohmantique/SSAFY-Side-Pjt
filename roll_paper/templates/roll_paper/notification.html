@@ -2,7 +2,12 @@
 
 {% block content %}
   <header class="m-5">
-    <h2>편지함은 2022년 5월 26일 00:00 부터 확인할 수 있어요 📫</h2>
+    <h2>벌써 확인하려구요? 🤭</h2>
   </header>
+
+  <main class="text-center">
+    <h4>1반 동기들이 어떤 편지를 남겼을지 궁금하신가요? 편지함은 {{ targetday.year }}년 {{ targetday.month }}월 {{ targetday.day }}일 {{ targetday.hour }}시 {{ targetday.minute }}분부터 확인할 수 있어요.</h4>
+    <h4>현재 {{ dday.days }}일 남았습니다!</h4>
+  </main>
 
 {% endblock content %}
