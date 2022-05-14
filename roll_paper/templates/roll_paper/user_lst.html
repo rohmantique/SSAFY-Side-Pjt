@@ -17,15 +17,6 @@
     </header>
     <h4 class="mb-4">편지를 보내고 싶은 사람의 이름을 클릭하세요!</h4>
     
-    <!-- Button trigger modal -->
-    <div class="d-flex justify-content-center mt-4">
-      <button type="button" class="btn userName" data-bs-toggle="modal" data-bs-target="#userlstModal">
-        <i class="bi bi-question-octagon-fill textBlue fs-3" width="20" height="20"></i>
-        <span class="align-text-bottom fs-3">
-          내가 찾는 사람이 없다구요?
-        </span>
-      </button>
-    </div>
   {% endif %}
 
   {% for user in user_lst %}
@@ -36,6 +27,19 @@
     {% endif %}
   {% endfor %}  
 
+  {% if empty %}
+  {% else %}
+    <!-- Button trigger modal -->
+    <div class="d-flex justify-content-center mt-4">
+      <button type="button" class="btn userName" data-bs-toggle="modal" data-bs-target="#userlstModal">
+        <i class="bi bi-question-octagon-fill textBlue fs-3" width="20" height="20"></i>
+        <span class="align-text-bottom fs-4">
+          내가 찾는 사람이 없다구요?
+        </span>
+      </button>
+    </div>
+  {% endif %}
+  
   <!-- 내가 찾는 사람 Modal (rollpaper/user_lst.html) -->
   <div class="modal fade" id="userlstModal" tabindex="-1" aria-labelledby="userlstModalLabel" aria-hidden="true">
     <div class="modal-dialog">
