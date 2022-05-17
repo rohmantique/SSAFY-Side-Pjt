@@ -3,14 +3,15 @@
 {% load static %}
 
 {% block content %}
-
-<img src="{% static 'wordcloud.jpg' %}" alt="">
   <header class="m-5">
-    <h2 class="align-middle">편지함 📫</h2>
+    <h2 class="text-center">편지함 📫</h2>
   </header>
 
-  <h4 class="mb-4">{{ realname }}님께 온 {{ number }}개의 편지를 확인해보세요!</h4>
+  <div class="d-flex justify-content-center mb-5">
+    <img src="{% static 'wordcloud.jpg' %}" alt="" class="img-fluid">
+  </div>
 
+  <h4 class="mb-4">{{ realname }}님께 온 {{ number }}개의 편지를 확인해보세요!</h4>
 
   {% for rollpaper in my_rollpaper %}
   <div class="mt-3">
