@@ -18,11 +18,13 @@
     <h2>내가 쓴 편지 📝</h2>
   </header>
 
-  {% for name in realname %}
-  <a href="{% url 'rollpaper:update' user.pk name %}" class="btn userName m-1">
-    <p>* {{ name }} *</p>
-  </a>
-{% endfor %}
+    {% for name in realname %}
+      <p class="m-0">
+        <a href="{% url 'rollpaper:update' user.pk name %}" class="btn userName m-1">
+          * {{ name }}
+        </a>
+      </p>
+    {% endfor %}
 
 {% endblock content %}
 
