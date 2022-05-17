@@ -24,5 +24,8 @@ urlpatterns = [
 
     #개발자에게 의견 보내기
     # path('sendmail/', views.sendmail, name='sendmail'),
+
+    #워드클라우드
+    path('rollpaper/wordcloud/', views.wordCloud, name='wordcloud'),
     
 ]
