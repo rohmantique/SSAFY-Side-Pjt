@@ -14,7 +14,6 @@ from datetime import datetime
 
 # 워드클라우드
 from wordcloud import WordCloud
-import matplotlib.pyplot as plt
 from collections import Counter
 from konlpy.tag import Okt
 from PIL import Image
@@ -99,33 +98,35 @@ def complete(request):
 @require_GET
 def letterbox(request, user_pk):
 
-    with open('임시.txt', 'r', encoding='utf-8') as f:
-        text = f.read()
-
-    okt = Okt()
-    morphs = okt.morphs(text)
-
-    words = [n for n in morphs if len(n) > 1]
-
-    c = Counter(words)
-
-    img = Image.open('./static/네잎클로버.jpeg')
-    img_array = np.array(img)
-
-    wc = WordCloud(
-        font_path='static/css/BMHANNA_11yrs_ttf.ttf', 
-        width=400, height=400, scale=0.8, 
-        max_font_size=100, 
-        background_color="white", 
-        mask=img_array
-        ).generate_from_frequencies(c)
-    wc.to_file('./static/워드클라우드.jpg')
-
-
     if request.user.pk == user_pk:
         now = datetime.now()
         target_day = datetime(year=2022, month=5, day=15, hour=0, minute=0, second=0)
         if now > target_day:
+
+            # 워드클라우드
+            with open('wordcloud.txt', 'r', encoding='utf-8') as f:
+                text = f.read()
+
+            okt = Okt()
+            morphs = okt.morphs(text)
+
+            words = [n for n in morphs if len(n) > 1]
+
+            c = Counter(words)
+
+            img = Image.open('./static/clover.jpeg')
+            img_array = np.array(img)
+
+            wc = WordCloud(
+                font_path='static/css/BMHANNA_11yrs_ttf.ttf', 
+                width=400, height=400, scale=0.8, 
+                max_font_size=100, 
+                background_color="white", 
+                mask=img_array
+                ).generate_from_frequencies(c)
+            wc.to_file('./static/wordcloud.jpg')
+
+            # 편지함
             user_info = request.user
             my_rollpaper = RollPaper.objects.filter(user=request.user)
             number = len(my_rollpaper)
@@ -136,6 +137,7 @@ def letterbox(request, user_pk):
                 'realname': user_info.realname[1:],
             }
             return render(request, 'roll_paper/letterbox.html', context)
+
         else:
             d_day = target_day - now
             context = {
@@ -234,32 +236,3 @@ def delete(request, user_pk, realname):
 #             return HttpResponse('메일 발송에 실패했습니다!')
 #     else:
 #         return redirect('rollpaper:aboutus')
-
-def wordCloud(request):
-    with open('임시.txt', 'r', encoding='utf-8') as f:
-        text = f.read()
-
-    okt = Okt()
-    morphs = okt.morphs(text)
-
-    words = [n for n in morphs if len(n) > 1]
-
-    c = Counter(words)
-
-    img = Image.open('./static/네잎클로버.jpeg')
-    img_array = np.array(img)
-
-    wc = WordCloud(
-        font_path='static/css/BMHANNA_11yrs_ttf.ttf', 
-        width=400, height=400, scale=0.8, 
-        max_font_size=100, 
-        background_color="white", 
-        mask=img_array
-        ).generate_from_frequencies(c)
-    wc.to_file('./static/워드클라우드.jpg')
-    
-    context = {
-        # 'a':a,
-    }
-
-    return render(request, 'roll_paper/wordcloud.html', context)
