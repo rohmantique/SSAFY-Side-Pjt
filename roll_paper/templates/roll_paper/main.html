@@ -35,12 +35,24 @@
       display: none;
     }
   }
+
+  .easteregg {
+    font-size: 3rem;
+    border: none;
+    outline: none;
+    background: none;
+    padding: 0;
+  }
 {% endblock style %}
 
 {% block content %}
   <header class="m-5 text-center">
     <h2>1학기 동안 <span id="line1" class="d-none"><br></span>다들</h2>
-    <h2>정말 수고 <span id="line2" class="d-none"><br></span>많으셨습니다!</h2>
+    <h2>정말 
+      <button type="button" class="easteregg" data-bs-toggle="modal" data-bs-target="#ericModal">
+        수고
+      </button> 
+      <span id="line2" class="d-none"><br></span>많으셨습니다!</h2>
   </header>
 
   <main class="my-5 mx-2">

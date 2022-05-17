@@ -13,11 +13,11 @@ from .forms import RollPaperForm
 from datetime import datetime
 
 # 워드클라우드
-from wordcloud import WordCloud
-from collections import Counter
-from konlpy.tag import Okt
-from PIL import Image
-import numpy as np
+# from wordcloud import WordCloud
+# from collections import Counter
+# from konlpy.tag import Okt
+# from PIL import Image
+# import numpy as np
 
 # Create your views here.
 @require_safe
@@ -112,28 +112,28 @@ def letterbox(request, user_pk):
         target_day = datetime(year=2022, month=5, day=27, hour=0, minute=0, second=0)
         if now > target_day:
 
-            # 워드클라우드
-            with open('wordcloud.txt', 'r', encoding='utf-8') as f:
-                text = f.read()
+            # # 워드클라우드
+            # with open('wordcloud.txt', 'r', encoding='utf-8') as f:
+            #     text = f.read()
 
-            okt = Okt()
-            morphs = okt.morphs(text)
+            # okt = Okt()
+            # morphs = okt.morphs(text)
 
-            words = [n for n in morphs if len(n) > 1]
+            # words = [n for n in morphs if len(n) > 1]
 
-            c = Counter(words)
+            # c = Counter(words)
 
-            img = Image.open('./static/clover.jpeg')
-            img_array = np.array(img)
+            # img = Image.open('./static/clover.jpeg')
+            # img_array = np.array(img)
 
-            wc = WordCloud(
-                font_path='static/css/BMHANNA_11yrs_ttf.ttf', 
-                width=400, height=400, scale=0.8, 
-                max_font_size=100, 
-                background_color="white", 
-                mask=img_array
-                ).generate_from_frequencies(c)
-            wc.to_file('./static/wordcloud.jpg')
+            # wc = WordCloud(
+            #     font_path='static/css/BMHANNA_11yrs_ttf.ttf', 
+            #     width=800, height=800, scale=0.8, 
+            #     max_font_size=100, 
+            #     background_color="white", 
+            #     mask=img_array
+            #     ).generate_from_frequencies(c)
+            # wc.to_file('./static/wordcloud.jpg')
 
             # 편지함
             user_info = request.user
