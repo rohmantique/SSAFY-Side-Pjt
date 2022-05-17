@@ -99,9 +99,32 @@ def complete(request):
 @require_GET
 def letterbox(request, user_pk):
 
+    with open('임시.txt', 'r', encoding='utf-8') as f:
+        text = f.read()
+
+    okt = Okt()
+    morphs = okt.morphs(text)
+
+    words = [n for n in morphs if len(n) > 1]
+
+    c = Counter(words)
+
+    img = Image.open('./static/네잎클로버.jpeg')
+    img_array = np.array(img)
+
+    wc = WordCloud(
+        font_path='static/css/BMHANNA_11yrs_ttf.ttf', 
+        width=400, height=400, scale=0.8, 
+        max_font_size=100, 
+        background_color="white", 
+        mask=img_array
+        ).generate_from_frequencies(c)
+    wc.to_file('./static/워드클라우드.jpg')
+
+
     if request.user.pk == user_pk:
         now = datetime.now()
-        target_day = datetime(year=2022, month=5, day=27, hour=0, minute=0, second=0)
+        target_day = datetime(year=2022, month=5, day=15, hour=0, minute=0, second=0)
         if now > target_day:
             user_info = request.user
             my_rollpaper = RollPaper.objects.filter(user=request.user)
@@ -223,9 +246,16 @@ def wordCloud(request):
 
     c = Counter(words)
 
-    wc = WordCloud(font_path='static/css/BMHANNA_11yrs_ttf.ttf', width=400, height=400, scale=2.0, max_font_size=100, background_color="white").generate_from_frequencies(c) # 'font_path'=''
-    # plt.figure(figsize = (6, 6)) # 최종 워드 클라우드 사이즈 지정
-    # a = plt.imshow(wc)
+    img = Image.open('./static/네잎클로버.jpeg')
+    img_array = np.array(img)
+
+    wc = WordCloud(
+        font_path='static/css/BMHANNA_11yrs_ttf.ttf', 
+        width=400, height=400, scale=0.8, 
+        max_font_size=100, 
+        background_color="white", 
+        mask=img_array
+        ).generate_from_frequencies(c)
     wc.to_file('./static/워드클라우드.jpg')
     
     context = {
