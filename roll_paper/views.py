@@ -26,9 +26,11 @@ def index(request):
         return redirect('rollpaper:main')
     return render(request, 'roll_paper/index.html')
 
+
 @require_GET
 def main(request):
     return render(request, 'roll_paper/main.html')
+
 
 @require_GET
 def aboutus(request):
@@ -38,29 +40,36 @@ def aboutus(request):
 @login_required
 @require_GET
 def userlst(request):
-    user_lst = User.objects.all().order_by('realname')
-    currentuser = len(user_lst) - 1
-    excepted = []
+    now = datetime.now()
+    target_day = datetime(year=2022, month=5, day=26, hour=23, minute=59, second=0)
+    if now < target_day:    
+        user_lst = User.objects.all().order_by('realname')
+        currentuser = len(user_lst) - 1
+        excepted = []
 
-    target_day = datetime(year=2022, month=5, day=26, hour=23, minute=59, second=59)
+        for user in user_lst[:]:
+            person = RollPaper.objects.filter(user2=request.user, user=user)
+            if person:
+                excepted.append(user)
+        
+        empty = 0
+        if len(user_lst)-1 == len(excepted):
+            empty = 1
 
-    for user in user_lst[:]:
-        person = RollPaper.objects.filter(user2=request.user, user=user)
-        if person:
-            excepted.append(user)
-    
-    empty = 0
-    if len(user_lst)-1 == len(excepted):
-        empty = 1
-
-    context = {
-        'user_lst': user_lst,
-        'excepted' : excepted,
-        'empty' : empty,
-        'currentuser' : currentuser,
-        'targetday': target_day,
-    }
-    return render(request, 'roll_paper/user_lst.html', context)
+        context = {
+            'user_lst': user_lst,
+            'excepted' : excepted,
+            'empty' : empty,
+            'currentuser' : currentuser,
+            'targetday': target_day,
+        }
+        return render(request, 'roll_paper/user_lst.html', context)
+    else:
+        name = request.user.realname[1:]
+        context = {
+            'name': name,
+        }
+        return render(request, 'roll_paper/user_lst_disable.html', context)
 
 
 @login_required
@@ -70,7 +79,6 @@ def write(request, realname):
    
     if request.method == 'POST':
         paperform = RollPaperForm(request.POST)
-        # cloudform = wordCloudForm(request.POST)
         if paperform.is_valid():
             rollpaper = paperform.save(commit=False)
             rollpaper.nickname = request.user.nickname
@@ -94,13 +102,14 @@ def write(request, realname):
 def complete(request):
     return render(request, 'roll_paper/complete.html')
 
+
 @login_required
 @require_GET
 def letterbox(request, user_pk):
 
     if request.user.pk == user_pk:
         now = datetime.now()
-        target_day = datetime(year=2022, month=5, day=15, hour=0, minute=0, second=0)
+        target_day = datetime(year=2022, month=5, day=27, hour=0, minute=0, second=0)
         if now > target_day:
 
             # 워드클라우드
@@ -192,19 +201,28 @@ def update(request, user_pk, realname):
 @login_required
 @require_GET
 def sentletter(request, user_pk):
-    writer = get_object_or_404(get_user_model(), pk=user_pk)
-    if request.user == writer:
-        sentrollpaper = RollPaper.objects.filter(user2=request.user)
-        realname = []
-        for rollpaper in sentrollpaper:
-            if rollpaper.user:
-                realname.append(rollpaper.user.realname)
-        realname.sort()
+    now = datetime.now()
+    target_day = datetime(year=2022, month=5, day=26, hour=23, minute=59, second=0)
+    if now < target_day:    
+        writer = get_object_or_404(get_user_model(), pk=user_pk)
+        if request.user == writer:
+            sentrollpaper = RollPaper.objects.filter(user2=request.user)
+            realname = []
+            for rollpaper in sentrollpaper:
+                if rollpaper.user:
+                    realname.append(rollpaper.user.realname)
+            realname.sort()
+            context = {
+                'realname' : realname
+            }
+            return render(request, 'roll_paper/sentletter.html', context)
+        return render(request, 'roll_paper/error.html')
+    else:
+        name = request.user.realname[1:]
         context = {
-            'realname' : realname
+            'name': name,
         }
-        return render(request, 'roll_paper/sentletter.html', context)
-    return render(request, 'roll_paper/error.html')
+        return render(request, 'roll_paper/write_disable.html', context)        
 
 
 @login_required
@@ -219,20 +237,3 @@ def delete(request, user_pk, realname):
     sentrollpaper.delete()
     messages.add_message(request, messages.ERROR, '편지가 성공적으로 삭제되었습니다! 감성의 추진력을 얻기 위함인가요?')
     return redirect('rollpaper:sentletter', user_pk)
-
-#개발자에게 의견보내기
-# def sendmail(request):
-#     if request.method == 'POST':
-#         sender = request.POST['sender']
-#         receiver = settings.EMAIL_HOST_USER
-#         subject = request.POST['sub']
-#         content = request.POST['content']
-#         mail = sendmail(subject, content, sender, receiver, fail_silently=False)
-
-#         if mail:
-#             messages.success(request, '메일이 발송되었습니다!')
-#             return redirect('rollpaper:aboutus')
-#         else:
-#             return HttpResponse('메일 발송에 실패했습니다!')
-#     else:
-#         return redirect('rollpaper:aboutus')
