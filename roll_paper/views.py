@@ -11,7 +11,14 @@ from accounts.models import User
 from .forms import RollPaperForm
 
 from datetime import datetime
-from django.conf import settings
+
+# 워드클라우드
+from wordcloud import WordCloud
+import matplotlib.pyplot as plt
+from collections import Counter
+from konlpy.tag import Okt
+from PIL import Image
+import numpy as np
 
 # Create your views here.
 @require_safe
@@ -205,3 +212,24 @@ def delete(request, user_pk, realname):
 #     else:
 #         return redirect('rollpaper:aboutus')
 
+def wordCloud(request):
+    with open('임시.txt', 'r', encoding='utf-8') as f:
+        text = f.read()
+
+    okt = Okt()
+    morphs = okt.morphs(text)
+
+    words = [n for n in morphs if len(n) > 1]
+
+    c = Counter(words)
+
+    wc = WordCloud(font_path='static/css/BMHANNA_11yrs_ttf.ttf', width=400, height=400, scale=2.0, max_font_size=100, background_color="white").generate_from_frequencies(c) # 'font_path'=''
+    # plt.figure(figsize = (6, 6)) # 최종 워드 클라우드 사이즈 지정
+    # a = plt.imshow(wc)
+    wc.to_file('./static/워드클라우드.jpg')
+    
+    context = {
+        # 'a':a,
+    }
+
+    return render(request, 'roll_paper/wordcloud.html', context)
