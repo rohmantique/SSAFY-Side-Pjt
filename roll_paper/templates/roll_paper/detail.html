@@ -22,8 +22,8 @@
     <div class="letter-header my-4">
       <h3>{{ rollpaper.title }}</h3>
     </div>
-    <div class="letter-body" style="width:80%; margin:0 auto;">
-      <p>{{ rollpaper.content }}</p>
+    <div class="letter-body text-start border border-secondary p-4" style="width:80%; margin:0 auto;">
+      <p>{{ rollpaper.content|linebreaks }}</p>
     </div>
     <div class="letter-footer">
       <img src="/static/images/letters.PNG" alt="Letter Image">
