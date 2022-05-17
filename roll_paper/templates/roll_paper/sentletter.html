@@ -20,7 +20,7 @@
 
   {% for name in realname %}
   <a href="{% url 'rollpaper:update' user.pk name %}" class="btn userName m-1">
-    {{ name }}
+    <p>* {{ name }} *</p>
   </a>
 {% endfor %}
 

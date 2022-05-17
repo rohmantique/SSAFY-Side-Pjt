@@ -62,12 +62,6 @@ input {
   font-size: 1.45rem !important;
 }
 
-.letter-content {
-  font-size: 1.45rem !important;
-  background-color: #d3eaff !important;
-  border: none !important;
-}
-
 .btn {
   font-size: 1.3rem !important;
 }
@@ -89,6 +83,12 @@ input {
 .letter-title {
   color: black !important;
   background-color: #d3eaff !important;
+}
+
+.letter-content {
+  font-size: 1.45rem !important;
+  background-color: #d3eaff !important;
+  border: none !important;
 }
 
 .accounts-container{
