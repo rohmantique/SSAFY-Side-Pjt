@@ -11,6 +11,12 @@
       max-width: 500px;
     }
   }
+
+  .letter-body {
+    border-style: dashed;
+    border-width: 2px;
+    border-color: #495057;
+  }
 {% endblock style %}
 
 {% block content %}
@@ -22,7 +28,7 @@
     <div class="letter-header my-4">
       <h3>{{ rollpaper.title }}</h3>
     </div>
-    <div class="letter-body text-start border border-secondary p-4" style="width:80%; margin:0 auto;">
+    <div class="letter-body text-start p-4" style="width:80%; margin:0 auto;">
       <p>{{ rollpaper.content|linebreaks }}</p>
     </div>
     <div class="letter-footer">
