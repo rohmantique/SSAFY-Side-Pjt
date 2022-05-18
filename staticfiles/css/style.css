@@ -1,0 +1,118 @@
+@font-face {
+  font-family: 'Garam';
+  src: url('나눔손글씨 가람연꽃.ttf');
+}
+
+body {
+  font-family: 'Garam';
+}
+
+html {
+  font-size:18px;
+}
+
+h1 {
+  font-size: 4.5rem;
+  text-align: center;
+}
+
+h2 {
+  font-size: 3rem;
+  text-align: center;
+}
+
+h3 {
+  font-size: 2.2rem;
+}
+
+h4 {
+  font-size: 1.8rem;
+  margin-bottom: 1rem !important;
+}
+
+p {
+  font-size: 1.45rem;
+} 
+
+a {
+  font-size: 1.45rem;
+}
+
+@media screen and (max-width : 768px){ 
+  html {font-size:16px;}
+}
+
+@media screen and (max-width : 425px){ 
+  html {font-size: 13px;}
+
+  .accounts-container {
+    width: 19rem !important;
+  }
+}
+
+.btn:focus, .btn:active, .form-control:focus, .form-control:active .navbar-toggler:focus, .navbar-toggler:focus {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+input {
+  background-color: #555CF1 !important;
+  border-style: none !important;
+  color: white !important;
+  font-size: 1.45rem !important;
+}
+
+.btn {
+  font-size: 1.3rem !important;
+}
+
+.mybtn {
+  background-color: #FFC90E !important;
+  color: #555CF1 !important;
+}
+
+.dangerbtn {
+  background-color: #d52d3e !important;
+  color: beige !important;
+}
+
+.userName:hover {
+  transform: scale(1.25);
+}
+
+.letter-title {
+  color: black !important;
+  background-color: #d3eaff !important;
+}
+
+.letter-content {
+  font-size: 1.45rem !important;
+  background-color: #d3eaff !important;
+  border: none !important;
+}
+
+.accounts-container{
+  width: 21rem;
+  margin: 0 auto;
+}
+
+.letter-container {
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.myClass {
+  background-color: #555CF1;
+}
+
+.textYellow {
+  color: #FFC90E;
+}
+
+.textBlue {
+  color: #555CF1;
+}
+
+li {
+  list-style-type: '📌 ';
+}
