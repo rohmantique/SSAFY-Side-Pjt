@@ -9,6 +9,7 @@ from django.contrib.auth.forms import (
 from django.contrib.auth import get_user_model
 from django.contrib.auth.hashers import check_password
 from django import forms
+from .validators import validate_realname
 
 User = get_user_model()
 
@@ -32,6 +33,7 @@ class CustomUserCreationForm(UserCreationForm):
         )
     )
     realname = forms.CharField(
+        validators=[validate_realname],
         label='이름',
         widget=forms.TextInput(
             attrs={
