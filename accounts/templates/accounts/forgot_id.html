@@ -12,14 +12,15 @@
   <form method="POST" class="text-center">
 
     {% csrf_token %}
-    Email : <input type="email" name='email'>
-    <input type="Submit" name="email_submit">
 
     {% for message in messages %}
-    
-      {{message}}
-
+    📌 {{ message }}
+    <br>
     {% endfor %}
+    <br>
+
+    Email : <input type="email" name='email' class="btn">
+    <input type="Submit" name="email_submit"  class="btn mybtn">
 
   </form>
   <br>
