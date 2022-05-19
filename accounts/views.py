@@ -185,7 +185,6 @@ class MyPasswordResetView(auth_views.PasswordResetView):
     # html_email_template_name = ...
 
     def form_valid(self, form):
-        messages.info(self.request, '암호 변경 메일을 발송했습니다.')
         return super().form_valid(form)
 
 
@@ -194,5 +193,4 @@ class MyPasswordResetConfirmView(auth_views.PasswordResetConfirmView):
     template_name = 'accounts/password_reset_confirm.html'
 
     def form_valid(self, form):
-        messages.info(self.request, '암호 리셋을 완료했습니다.')
         return super().form_valid(form)
