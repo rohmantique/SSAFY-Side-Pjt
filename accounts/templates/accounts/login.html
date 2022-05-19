@@ -6,14 +6,21 @@
   </header>
 
   <div class="accounts-container mt-4">
+
+    <div style="text-align: right;">
+      <a style="text-decoration: none;" href="{% url 'accounts:forgot_id' %}">아이디 찾기</a><br>
+      <a style="text-decoration: none;" href="{% url 'accounts:password_reset' %}">비밀번호 찾기</a>
+    </div>
+    <hr>
     <form action="" method='POST'>
       {% csrf_token %}
       {{ form.as_p }}
       <button class="btn mybtn" style="float: right;">로그인</button>
     </form>
-    <a href="{% url 'rollpaper:index' %}" class="btn mybtn">뒤로가기</a>
+    <div>
+      <a href="{% url 'rollpaper:index' %}" class="btn mybtn">뒤로가기</a>
+    </div>
   </div>
-  <a href=" {% url 'accounts:forgot_id' %}">아이디</a> / <a href="{% url 'accounts:password_reset' %}">비밀번호 찾기</a>
 {% endblock content %}
 
 {% block script %}

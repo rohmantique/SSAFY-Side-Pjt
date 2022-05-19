@@ -72,17 +72,6 @@ class CustomUserCreationForm(UserCreationForm):
         model = User
         fields = ('username','realname','email', 'nickname','password1', 'password2',)
 
-# class WebUserCreationForm(UserCreationForm):
-    
-#     def save(self, commit=True):
-#         user = super(WebUserCreationForm, self).save(commit=False)
-
-#         if commit:
-#             user.is_active = False
-#             user.save()
-
-#             current_site = get_current_site(self.request)
-
 
 class CustomUserChangeForm(UserChangeForm):
     nickname = forms.CharField(
