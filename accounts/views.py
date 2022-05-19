@@ -159,7 +159,7 @@ def forgot_id(request):
                 template = render_to_string(
                     'accounts/email_template.html', 
                     { 'name':user.realname, 
-                    'id':user.username }
+                    'id':user.username,}
                     )
                 send_email = EmailMessage(
                     '서울1반 추억쌓피 아이디 안내',
@@ -173,3 +173,26 @@ def forgot_id(request):
             messages.info(request, "해당 이메일의 사용자가 존재하지 않습니다.")
     return render(request, 'accounts/forgot_id.html', context)
 
+
+
+from django.urls import reverse_lazy
+from django.contrib.auth import views as auth_views
+
+class MyPasswordResetView(auth_views.PasswordResetView):
+    success_url=reverse_lazy('accounts:login')
+    template_name = 'accounts/password_reset.html'
+    email_template_name = 'accounts/password_reset_form.html'
+    # html_email_template_name = ...
+
+    def form_valid(self, form):
+        messages.info(self.request, '암호 변경 메일을 발송했습니다.')
+        return super().form_valid(form)
+
+
+class MyPasswordResetConfirmView(auth_views.PasswordResetConfirmView):
+    success_url=reverse_lazy('accounts:login')
+    template_name = 'accounts/password_reset_confirm.html'
+
+    def form_valid(self, form):
+        messages.info(self.request, '암호 리셋을 완료했습니다.')
+        return super().form_valid(form)
