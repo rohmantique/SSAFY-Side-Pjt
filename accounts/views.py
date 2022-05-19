@@ -1,8 +1,8 @@
-from django.shortcuts import render, redirect
-from django.contrib.auth.forms import (
-    AuthenticationForm, 
-    PasswordChangeForm
-)
+from django.shortcuts import get_object_or_404, render, redirect
+from django.contrib import messages
+
+from django.core.mail import EmailMessage
+from django.template.loader import render_to_string
 from .forms import (
     CustomUserCreationForm, 
     CustomUserChangeForm
@@ -10,7 +10,6 @@ from .forms import (
 from django.contrib.auth import (
     login as auth_login,
     logout as auth_logout,
-    get_user_model,
     update_session_auth_hash,
 )
 from django.contrib.auth.decorators import login_required
@@ -22,6 +21,7 @@ from .forms import (
     CustomPasswordChangeForm,
 )
 from roll_paper.models import RollPaper
+from accounts.models import User
 
 #이메일 관련 모듈
 # from django.core.mail import EmailMessage
@@ -145,3 +145,31 @@ def user_delete(request):
     }
 
     return render(request, 'accounts/user_delete.html', context)
+
+
+def forgot_id(request):
+    context = {
+
+    }
+    if request.method == 'POST':
+        email = request.POST.get('email')
+        try:
+            user = User.objects.get(email=email)
+            if user:
+                template = render_to_string(
+                    'accounts/email_template.html', 
+                    { 'name':user.realname, 
+                    'id':user.username }
+                    )
+                send_email = EmailMessage(
+                    '서울1반 추억쌓피 아이디 안내',
+                    template,
+                    'ddoongddangs@gmail.com',
+                    [email],
+                )
+                send_email.send(fail_silently=False)
+                return render(request, 'accounts/forgot_id_sent.html', context)
+        except:
+            messages.info(request, "해당 이메일의 사용자가 존재하지 않습니다.")
+    return render(request, 'accounts/forgot_id.html', context)
+

@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1> 아이디 찾기 </h1>
+<p> 회원가입시 입력했던 이메일을 제출하면, 해당 이메일 주소로 아이디를 발송해드려요.</p>
+
+<form method="POST">
+
+  {% csrf_token %}
+  Email : <input type="email" name='email'>
+  <input type="Submit" name="email_submit">
+
+  {% for message in messages %}
+  
+    {{message}}
+
+  {% endfor %}
+
+</form>
+
+
+{% endblock content %}

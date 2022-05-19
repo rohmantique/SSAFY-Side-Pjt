@@ -14,5 +14,8 @@ urlpatterns = [
 
     # 회원탈퇴
     path('user_delete/', views.user_delete, name='user_delete'),
+
+    # 아이디, 비밀번호 찾기
+    path('forgot_id/', views.forgot_id, name='forgot_id')
         
 ]
