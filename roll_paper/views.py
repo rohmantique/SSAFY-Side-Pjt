@@ -65,7 +65,7 @@ def userlst(request):
         }
         return render(request, 'roll_paper/user_lst.html', context)
     else:
-        name = request.user.realname[1:]
+        name = request.user.realname[:-2]
         context = {
             'name': name,
         }
@@ -143,7 +143,7 @@ def letterbox(request, user_pk):
                 'my_rollpaper': my_rollpaper,
                 'user_info': user_info,
                 'number':number,
-                'realname': user_info.realname[1:],
+                'realname': user_info.realname[:-2],
             }
             return render(request, 'roll_paper/letterbox.html', context)
 
@@ -175,26 +175,24 @@ def detail(request, user_pk, rollpaper_pk):
 @login_required
 @require_http_methods(['GET', 'POST'])
 def update(request, user_pk, realname):
-    writer = get_object_or_404(get_user_model(), pk=user_pk)
-    if writer:
-        if request.user == writer:
-            receiver = get_object_or_404(get_user_model(), realname=realname)
-            rollpaper = get_object_or_404(RollPaper, user = receiver, user2 = request.user)
+    if request.user.pk == user_pk:
+        receiver = get_object_or_404(get_user_model(), realname=realname)
+        rollpaper = get_object_or_404(RollPaper, user = receiver, user2 = request.user)
 
-            if request.method == 'POST':
-                form = RollPaperForm(request.POST, instance=rollpaper)
-                if form.is_valid():
-                    rollpaper = form.save()
-                    return redirect('rollpaper:sentletter', user_pk)
-            else:
-                form = RollPaperForm(instance=rollpaper)
+        if request.method == 'POST':
+            form = RollPaperForm(request.POST, instance=rollpaper)
+            if form.is_valid():
+                rollpaper = form.save()
+                return redirect('rollpaper:sentletter', user_pk)
+        else:
+            form = RollPaperForm(instance=rollpaper)
 
-            context = {
-                'form': form,
-                'realname' : realname
-            }
+        context = {
+            'form': form,
+            'realname' : realname
+        }
 
-            return render(request, 'roll_paper/update.html', context)
+        return render(request, 'roll_paper/update.html', context)
     return render(request, 'roll_paper/error.html')
 
 
@@ -204,8 +202,7 @@ def sentletter(request, user_pk):
     now = datetime.now()
     target_day = datetime(year=2022, month=5, day=26, hour=23, minute=59, second=0)
     if now < target_day:    
-        writer = get_object_or_404(get_user_model(), pk=user_pk)
-        if request.user == writer:
+        if request.user.pk == user_pk:
             sentrollpaper = RollPaper.objects.filter(user2=request.user)
             realname = []
             for rollpaper in sentrollpaper:
@@ -218,7 +215,7 @@ def sentletter(request, user_pk):
             return render(request, 'roll_paper/sentletter.html', context)
         return render(request, 'roll_paper/error.html')
     else:
-        name = request.user.realname[1:]
+        name = request.user.realname[:-2]
         context = {
             'name': name,
         }
