@@ -25,5 +25,6 @@ urlpatterns = [
         views.MyPasswordResetConfirmView.as_view(
             template_name="accounts/password_reset_confirm.html"), 
         name='password_reset_confirm'),
+    path('reset_complete/', views.password_reset_complete, name='password_reset_complete')
         
 ]

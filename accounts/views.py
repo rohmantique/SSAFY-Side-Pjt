@@ -23,6 +23,9 @@ from .forms import (
 from roll_paper.models import RollPaper
 from accounts.models import User
 
+from django.urls import reverse_lazy
+from django.contrib.auth import views as auth_views
+
 #이메일 관련 모듈
 # from django.core.mail import EmailMessage
 # from rest_framework import status
@@ -148,6 +151,10 @@ def user_delete(request):
 
 
 def forgot_id(request):
+
+    if request.user.is_authenticated:
+        return redirect('rollpaper:index')
+
     context = {
 
     }
@@ -174,12 +181,14 @@ def forgot_id(request):
     return render(request, 'accounts/forgot_id.html', context)
 
 
+def password_reset_complete(request):
+    if request.user.is_authenticated:
+        return redirect('rollpaper:index')
+    return render(request, 'accounts/password_reset_complete.html')
 
-from django.urls import reverse_lazy
-from django.contrib.auth import views as auth_views
 
 class MyPasswordResetView(auth_views.PasswordResetView):
-    success_url=reverse_lazy('accounts:login')
+    success_url=reverse_lazy('accounts:password_reset_complete')
     template_name = 'accounts/password_reset.html'
     email_template_name = 'accounts/password_reset_form.html'
     # html_email_template_name = ...

@@ -12,3 +12,4 @@ def validate_realname(realname):
             _('%(realname)s는(은) SSAFY 7기 서울 1반 소속이 아닙니다.'),
             params={'realname': realname},
         )
+
