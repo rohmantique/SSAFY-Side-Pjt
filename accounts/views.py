@@ -5,7 +5,8 @@ from django.core.mail import EmailMessage
 from django.template.loader import render_to_string
 from .forms import (
     CustomUserCreationForm, 
-    CustomUserChangeForm
+    CustomUserChangeForm,
+    CustomPasswordRestForm
 )
 from django.contrib.auth import (
     login as auth_login,
@@ -186,7 +187,14 @@ class MyPasswordResetView(auth_views.PasswordResetView):
     success_url=reverse_lazy('accounts:password_reset_complete')
     template_name = 'accounts/password_reset.html'
     email_template_name = 'accounts/password_reset_form.html'
-    # html_email_template_name = ...
+    form_class = CustomPasswordRestForm
+
+    def get(self, request, *args, **kwargs):
+        if request.user.is_authenticated:
+            return redirect('rollpaper:index')
+
+        form = self.form_class(initial=self.initial)
+        return render(request, self.template_name, { 'form': form })
 
     def form_valid(self, form):
         return super().form_valid(form)
