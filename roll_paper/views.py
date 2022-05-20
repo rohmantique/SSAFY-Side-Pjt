@@ -47,7 +47,7 @@ def userlst(request):
         currentuser = len(user_lst) - 1
         excepted = []
 
-        for user in user_lst[:]:
+        for user in user_lst:
             person = RollPaper.objects.filter(user2=request.user, user=user)
             if person:
                 excepted.append(user)
@@ -65,7 +65,7 @@ def userlst(request):
         }
         return render(request, 'roll_paper/user_lst.html', context)
     else:
-        name = request.user.realname[:-2]
+        name = request.user.realname[-2:]
         context = {
             'name': name,
         }
@@ -96,6 +96,7 @@ def write(request, realname):
 
     context = {
         'paperform': paperform,
+        'receiver': realname[-2:]
     }
     return render(request, 'roll_paper/write.html', context)
 
@@ -143,7 +144,7 @@ def letterbox(request, user_pk):
                 'my_rollpaper': my_rollpaper,
                 'user_info': user_info,
                 'number':number,
-                'realname': user_info.realname[:-2],
+                'realname': user_info.realname[-2:],
             }
             return render(request, 'roll_paper/letterbox.html', context)
 
