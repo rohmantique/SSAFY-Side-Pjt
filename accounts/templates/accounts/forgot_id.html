@@ -9,18 +9,18 @@
   <div class="accounts-container mt-3">
   <p class="text-center"> 회원가입시 입력했던 이메일을 제출하면 <br>해당 이메일 주소로 아이디를 발송해드려요.</p>
 
-  <form method="POST" class="text-center">
+  <form method="POST">
 
     {% csrf_token %}
 
     {% for message in messages %}
     📌 {{ message }}
-    <br>
     {% endfor %}
-    <br>
 
-    <p class="d-inline">이메일 : </p><input type="email" name='email' class="btn">
-    <input type="Submit" name="email_submit"  class="btn mybtn">
+    <div class="text-center mt-5">
+      <p class="d-inline">이메일 : </p><input type="email" name='email' class="btn">
+      <input type="Submit" name="email_submit"  class="btn mybtn">
+    </div>
 
   </form>
   <br>
