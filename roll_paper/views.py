@@ -41,7 +41,7 @@ def aboutus(request):
 @require_GET
 def userlst(request):
     now = datetime.now()
-    target_day = datetime(year=2022, month=5, day=26, hour=23, minute=59, second=0)
+    target_day = datetime(year=2022, month=5, day=27, hour=23, minute=59, second=0)
     if now < target_day:    
         user_lst = User.objects.all().order_by('realname')
         currentuser = len(user_lst) - 1
