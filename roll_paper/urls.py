@@ -18,7 +18,7 @@ urlpatterns = [
     path('rollpaper/<int:user_pk>/letterbox/<int:rollpaper_pk>/', views.detail, name='detail'),
 
     #편지수정 & 삭제
-    path('rollpaper/sentletter/<int:user_pk>/', views.sentletter, name='sentletter'),
-    path('rollpaper/sentletter/<int:user_pk>/<str:realname>/', views.update, name='update'),
+    path('rollpaper/sentletter/<int:user_pk>/accessdenied/', views.sentletter, name='sentletter'),
+    path('rollpaper/sentletter/<int:user_pk>/<str:realname>/accessdenied/', views.update, name='update'),
     path('rollpaper/sentletter/<int:user_pk>/<str:realname>/delete/', views.delete, name='delete'),   
 ]

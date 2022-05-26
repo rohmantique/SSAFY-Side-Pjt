@@ -201,7 +201,7 @@ def update(request, user_pk, realname):
 @require_GET
 def sentletter(request, user_pk):
     now = datetime.now()
-    target_day = datetime(year=2022, month=5, day=28, hour=23, minute=59, second=59)
+    target_day = datetime(year=2022, month=5, day=26, hour=23, minute=59, second=59)
     if now < target_day:    
         if request.user.pk == user_pk:
             sentrollpaper = RollPaper.objects.filter(user2=request.user)
