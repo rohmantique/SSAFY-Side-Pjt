@@ -41,7 +41,7 @@ def aboutus(request):
 @require_GET
 def userlst(request):
     now = datetime.now()
-    target_day = datetime(year=2022, month=5, day=27, hour=23, minute=59, second=0)
+    target_day = datetime(year=2022, month=5, day=28, hour=23, minute=59, second=59)
     if now < target_day:    
         user_lst = User.objects.all().order_by('realname')
         currentuser = len(user_lst) - 1
@@ -201,7 +201,7 @@ def update(request, user_pk, realname):
 @require_GET
 def sentletter(request, user_pk):
     now = datetime.now()
-    target_day = datetime(year=2022, month=5, day=26, hour=23, minute=59, second=0)
+    target_day = datetime(year=2022, month=5, day=28, hour=23, minute=59, second=59)
     if now < target_day:    
         if request.user.pk == user_pk:
             sentrollpaper = RollPaper.objects.filter(user2=request.user)
