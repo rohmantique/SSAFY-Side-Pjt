@@ -216,7 +216,7 @@ def sentletter(request, user_pk):
             return render(request, 'roll_paper/sentletter.html', context)
         return render(request, 'roll_paper/error.html')
     else:
-        name = request.user.realname[:-2]
+        name = request.user.realname[-2:]
         context = {
             'name': name,
         }
