@@ -30,7 +30,7 @@
 | :----: | :----------: | :----------------------------------------------------------: |
 | 김수연 |   기획, BE   | 백엔드 서버 구축, 캐릭터 이미지 제작, ERD, accounts CRUD, rollpaper CRUD, 워드클라우드 |
 | 노희진 | 기획, BE, FE | User Flow 기획, ERD, accounts CRUD, rollpaper CRUD, 설문조사 기획 |
-| 명은호 |   기획, FE   | User Story 기획, 반응형 이미지 및 파비콘, git branch 관리, 설문조사 기획, 이스터 에그 및 FE 전반 |
+| 명은호 |   기획, FE   | User Story 기획, 이미지 및 파비콘 제작, git branch 관리, 설문조사 기획, 이스터 에그 및 FE 전반 |
 
 ----
 
@@ -172,12 +172,14 @@
 
   
 
-  #### 4) url로 페이지 접근시 발생하는 오류 
+  
 
+  #### 4) url로 페이지 접근시 발생하는 오류 
+  
   > 편지쓰기 url로 접근할 때 이미 편지를 쓴 사용자에게 두번 이상 편지 쓰기가 가능했다. 
   >
   > 해당 오류를 수정하기 위해 rollpaper/views.py의 write 함수에 아래와 같은 조건문을 추가해 오류를 방지했다.
-
+  
   ```python
    elif RollPaper.objects.filter(user2 = request.user, user = receiver).exists():
               return redirect('rollpaper:userlst')
@@ -185,11 +187,117 @@
 
   
 
+  
+  
   #### 5) 워드 클라우드
-
+  
   > 
 
+
+
+
+
+
+
+- Front
+
   
+
+  #### 1) CSS 컨벤션 부재
+
+  > 프로젝트 초반에 h1, h2, p 태그들에 대해 글꼴 크기를 각각 부여하지 않다보니 static 폴더에 따로 담아놓은 css 서식 파일과 각 페이지의 style 서식 및 부트스트랩의 클래스 서식이 충돌이 많이 되고 overriding도 2차, 3차적으로 하게 되었다.
+  >
+  > 반응형 구현을 위해 각 template의 style 태그에다가 미디어 쿼리를 사용해서 글꼴과 이미지 height를 다르게 주다보니 코드의 길이는 길어지고 가독성은 떨어지며, 어디에서 적용되는지 찾기 어려워서 유지보수가 안되고 계속 덮어쓰는 형식의 CSS 코드가 만들어졌다.
+  >
+  > 페이지와 컴포넌트의 개수가 많지 않고 프론트엔드 작업을 하는 사람의 수가 2명이다보니 UI적 완성도에는 문제가 없었지만, 스케일이 커지는 프로젝트의 경우 서로의 코드에 대해 소통이 안되어 치명적인 작업 속도와 유지보수에 관련한 문제가 야기될 수 있다고 생각이 든다. 
+
+  
+
+  
+
+  #### 2) Bootstrap 서식 덮어쓰기
+
+  > Bootstrap 내부적으로 최우선순위로 적용되는 서식들에 대해 (e.g. input 태그나 button 태그를 클릭했을 때 연한 하늘색 outline이 띄워지는 것) 없애주어 사이트 색감이 해치지 않게 보완했다.
+  >
+  > ```css
+  > .btn:focus, .btn:active, .form-control:focus, .form-control:active .navbar-toggler:focus, .navbar-toggler:focus {
+  >   outline: none !important;
+  >   box-shadow: none !important;
+  > }
+  > ```
+
+  
+
+  
+
+  #### 3) Viewport에 따른 반응형 구현
+
+  > 반응형 구현이 포함된 프로젝트로써 데스크톱의 landscape 화면과 모바일의 horizontal 화면의 차이를 감안해 단순히 이미지 크기를 줄이는게 아닌, 메인 화면의 이미지를 다르게 뽑아 미디어 쿼리로 적용했다.
+  >
+  > 총 3가지의 비율로 데스크톱, 태블렛, 그리고 모바일로 구분을 두었다.
+  >
+  > 이미지 뿐만 아니라 이스터 에그를 배치하는 위치도 변화를 주어 모든 viewport에 관해 최적의 UI를 구현했다.
+  >
+  > ```css
+  >   @media(min-width: 1200px) {
+  >     .container {
+  >       background-image: url('../../static/images/main_pc.PNG');
+  >       background-size: contain;
+  >       background-repeat: no-repeat;
+  >       background-position: top;
+  >     }
+  >   }
+  > 
+  >   @media(max-width: 1200px) and (min-width: 474px){
+  >     .container {
+  >         background-image: url('../../static/images/main.PNG');
+  > 		...
+  >       }
+  >   }
+  >   
+  >   @media(max-width: 474px){
+  >     .container {
+  >       background-image: url('../../static/images/main2.PNG');
+  >       ...
+  >     }
+  >   }
+  > ```
+
+  
+
+  
+
+  #### 4) Form에 서식 부여하기
+
+  > 반응형으로도 구현한 template 서식 상 textarea 태그의 max-width 길이를 제한해 두었기 때문에 편지 확인을 위해 불러오는 form도 같은 서식을 유지해야 했다.
+  >
+  > forms.py에서 widget을 활용해 따로 `letter-title`과 `letter-content`라는 클래스명을 부여하여 template에서 form으로 불러와도 css에서 개별적으로 서식을 관리할 수 있도록 했다.
+  >
+  > ```python
+  > class RollPaperForm(forms.ModelForm):
+  >     title = forms.CharField(
+  >         ...
+  >         widget=forms.TextInput(
+  >             attrs={
+  >                 'class': 'form-control letter-title',
+  >                 },
+  >         )
+  >     )
+  >     content = forms.CharField(
+  >         ...
+  >         widget=forms.Textarea(
+  >             attrs={
+  >                 'class': 'form-control letter-content',
+  >             },
+  >         )
+  >     )
+  > ```
+
+
+
+
+
+
 
 ## 8) 성과
 
