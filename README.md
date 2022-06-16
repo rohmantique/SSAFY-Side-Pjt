@@ -12,6 +12,8 @@
 
 ## 팀원 및 역할
 
+팀명: 뚱땅즈
+
 FrontEnd: 노희진, 명은호
 
 BackEnd: 김수연, 노희진
@@ -95,26 +97,14 @@ Git, Github, MatterMost, Notion, Discord
 ## 코드에 대하여
 
 - BackEnd: https://better-pint-8a3.notion.site/BE-62fcd8123e034d99b1b50c1c9a120621
-
 - FrontEnd: https://better-pint-8a3.notion.site/FE-c44b45ba916f4ef4b8a95a98796c6744
-
-
+- 서비스 확장을 위해: https://better-pint-8a3.notion.site/3ef27b2872a74e6a9ade91254839364d
 
 
 
 ## 성과
 
 - 삼성 청년 SW 아카데미 8기 공식 롤링 페이퍼 서비스로 출시 예정
-
-
-
-
-
-## 서비스 확장을 위해
-
-- 워드 클라우드 데이터 실시간 받은 후 이미지 생성
-- 링크 공유를 통한 방 생성 및 회원 가입
-- 본인 인증 서비스 (중복 계정 예방 차원)
 
 
 
