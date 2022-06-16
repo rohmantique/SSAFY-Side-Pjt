@@ -175,7 +175,9 @@
 
 ## Resource
 
-#### 회의록 및 개발 상세 일정표 https://better-pint-8a3.notion.site/s-963d8cd856734b44bdb744856e39fc34
+#### 회의록 및 개발 상세 일정표
+
+####  https://better-pint-8a3.notion.site/s-963d8cd856734b44bdb744856e39fc34
 
 
 
