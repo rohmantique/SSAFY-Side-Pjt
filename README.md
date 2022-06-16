@@ -6,15 +6,11 @@
 
 ## 개발 기간
 
-----
-
 2022.04.12 ~ 5.23
 
 
 
 ## 팀원 및 역할
-
----
 
 FrontEnd: 노희진, 명은호
 
@@ -24,8 +20,6 @@ BackEnd: 김수연, 노희진
 
 ## 기술 스택
 
----
-
 BackEnd:  Python, Django, SQLite3, AWS
 
 FrontEnd: JavaScript, HTML, CSS
@@ -34,13 +28,9 @@ FrontEnd: JavaScript, HTML, CSS
 
 ## 협업 툴
 
----
-
 Git, Github, MatterMost, Notion, Discord
 
 
-
-----
 
 ## 서비스 소개
 
@@ -50,8 +40,6 @@ Git, Github, MatterMost, Notion, Discord
 
 
 
----------------------
-
 ## ERD
 
 
@@ -59,8 +47,6 @@ Git, Github, MatterMost, Notion, Discord
 ![ddoongddang_erd](서울1반_추억쌓피_회고.assets/ddoongddang_erd.png)
 
 
-
-------
 
 ## 주요 기능
 
@@ -102,7 +88,7 @@ Git, Github, MatterMost, Notion, Discord
 
 
 
-----
+
 
 
 
@@ -110,11 +96,9 @@ Git, Github, MatterMost, Notion, Discord
 
 - BackEnd: https://better-pint-8a3.notion.site/BE-62fcd8123e034d99b1b50c1c9a120621
 
-- FrontEnd: https://better-pint-8a3.notion.site/BE-62fcd8123e034d99b1b50c1c9a120621
+- FrontEnd: https://better-pint-8a3.notion.site/FE-c44b45ba916f4ef4b8a95a98796c6744
 
 
-
-----
 
 
 
@@ -123,8 +107,6 @@ Git, Github, MatterMost, Notion, Discord
 - 삼성 청년 SW 아카데미 8기 공식 롤링 페이퍼 서비스로 출시 예정
 
 
-
-----
 
 
 
@@ -136,17 +118,11 @@ Git, Github, MatterMost, Notion, Discord
 
 
 
----
-
 
 
 ## Resource
 
-
-
-#### 회의록 및 개발 상세 일정표
-
-####  https://better-pint-8a3.notion.site/s-963d8cd856734b44bdb744856e39fc34
+회의록 및 개발 상세 일정표: https://better-pint-8a3.notion.site/s-963d8cd856734b44bdb744856e39fc34
 
 
 
