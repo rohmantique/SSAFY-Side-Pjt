@@ -22,9 +22,11 @@ BackEnd: 김수연, 노희진
 
 ## 기술 스택
 
+FrontEnd: JavaScript, HTML, CSS
+
 BackEnd:  Python, Django, SQLite3, AWS
 
-FrontEnd: JavaScript, HTML, CSS
+
 
 
 
