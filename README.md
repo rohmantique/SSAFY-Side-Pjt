@@ -6,7 +6,7 @@
 
 ## 개발 기간
 
-2022.04.12 ~ 5.23
+2022.04.12 ~ 5.21 (6주)
 
 
 
@@ -46,9 +46,7 @@ Git, Github, MatterMost, Notion, Discord
 
 ## ERD
 
-
-
-![ddoongddang_erd](서울1반_추억쌓피_회고.assets/ddoongddang_erd.png)
+<img src="README.assets/rollpaper_erd_final.png" alt="rollpaper_erd_final" style="zoom:75%;" />
 
 
 
